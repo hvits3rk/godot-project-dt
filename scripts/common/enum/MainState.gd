@@ -1,0 +1,1 @@
+enum { IDLE, CREATING_ITEM }
