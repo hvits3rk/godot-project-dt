@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="DwarfTrader"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/forge/Forge.tscn"
 config/icon="res://icon.png"
 
 [display]

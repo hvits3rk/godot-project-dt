@@ -1,0 +1,1 @@
+enum { SWORD, AXE, HAMMER }

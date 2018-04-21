@@ -1,13 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scripts/gui/GUI.gd" type="Script" id=1]
+[ext_resource path="res://scripts/forge/gui/ForgeGUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/GUI/lifebar_bg.png" type="Texture" id=2]
 [ext_resource path="res://assets/GUI/lifebar_fill.png" type="Texture" id=3]
-[ext_resource path="res://scripts/gui/InputFields.gd" type="Script" id=4]
-[ext_resource path="res://scenes/gui/ItemNameInput.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/gui/ItemDescriptionInput.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/forge/gui/InputFields.gd" type="Script" id=4]
+[ext_resource path="res://scenes/forge/gui/ItemNameInput.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/forge/gui/ItemDescriptionInput.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/forge/gui/ItemTypeSelector.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/forge/gui/WeaponTypeSelector.tscn" type="PackedScene" id=8]
 
-[node name="GUI" type="MarginContainer"]
+[node name="ForgeGUI" type="MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -137,6 +139,7 @@ _sections_unfolded = [ "Margin", "Size Flags" ]
 
 [node name="InputFields" type="VBoxContainer" parent="VBoxContainer/Center" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
@@ -183,6 +186,29 @@ group = null
 text = "START PRODUCTION"
 flat = false
 align = 1
+
+[node name="ItemTypeSelector" parent="VBoxContainer/Center" index="1" instance=ExtResource( 7 )]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -235.0
+margin_top = -29.0
+margin_right = 235.0
+margin_bottom = 29.0
+_sections_unfolded = [ "Margin", "Size Flags" ]
+
+[node name="WeaponTypeSelector" parent="VBoxContainer/Center" index="2" instance=ExtResource( 8 )]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -243.5
+margin_top = -30.0
+margin_right = 243.5
+margin_bottom = 30.0
 
 [node name="Bottom" type="Control" parent="VBoxContainer" index="2"]
 
