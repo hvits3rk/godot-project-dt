@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/forge/Forge.gd" type="Script" id=1]
 [ext_resource path="res://scenes/forge/gui/ForgeGUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/player/gui/PlayerGUI.gd" type="Script" id=3]
 [ext_resource path="res://scripts/player/gui/fsm/State.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Inventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/player/Inventory.gd" type="Script" id=6]
 
 [node name="Forge" type="Node" index="0"]
 
@@ -45,6 +46,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1280.0
 margin_bottom = 720.0
+script = ExtResource( 6 )
 _sections_unfolded = [ "Margin", "custom_constants" ]
 
 [node name="MarginContainer" type="MarginContainer" parent="PlayerGUI" index="2"]

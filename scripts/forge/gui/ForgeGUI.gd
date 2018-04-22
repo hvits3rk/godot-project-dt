@@ -45,7 +45,7 @@ func _process(delta):
 	
 	set_process(false)
 
-func _on_Forge_item_created():
+func _on_Forge_item_created(item):
 	state = State.IDLE
 	yield(get_tree().create_timer(1.0), "timeout")
 	set_process(true)

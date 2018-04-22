@@ -13,7 +13,6 @@ const PROGRESS_MAX = 100
 var progress = 0
 var state
 
-var created_items_list = []
 var item_in_production = {}
 
 func _ready():
@@ -21,6 +20,7 @@ func _ready():
 	state = ForgeState.IDLE
 	emit_signal("state_changed", state)
 	emit_signal("progress_changed", progress)
+	set_process(false)
 
 func _process(delta):
 	match state:
@@ -30,25 +30,21 @@ func _process(delta):
 			creating_item(delta)
 
 func creating_item(delta):
-	progress += delta * 20
+	progress += delta * 100
 	emit_signal("progress_changed", progress)
 	
 	if progress >= PROGRESS_MAX:
 		progress = PROGRESS_MAX
 		state = ForgeState.IDLE
 		emit_signal("progress_changed", progress)
-		emit_signal("item_created")
 		emit_signal("state_changed", state)
-#		print("Item created: [name: '{name}', description: '{description}']".format(item_in_production))
 		var new_item = item_in_production.duplicate()
-		created_items_list.append(new_item)
-#		print("Inventory")
-#		for item in created_items_list:
-#			print("[name: '{name}', description: '{description}']".format(item))
+		emit_signal("item_created", new_item)
+		set_process(false)
 
 func _on_ForgeGUI_production_started(item):
 	progress = 0
 	state = ForgeState.CREATING_ITEM
 	item_in_production = item.duplicate()
-#	print("Creating item: [type: '{item_type}', weapon_type: '{weapon_type}', name: '{name}', description: '{description}']".format(item_in_production))
 	emit_signal("state_changed", state)
+	set_process(true)
