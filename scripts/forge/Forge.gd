@@ -8,6 +8,7 @@ onready var ForgeGUI = get_node("ForgeGUI")
 
 const ForgeState = preload("res://scripts/forge/common/enum/ForgeState.gd")
 
+const PROGRESS_SPEED = 50
 const PROGRESS_MAX = 100
 
 var progress = 0
@@ -30,7 +31,7 @@ func _process(delta):
 			creating_item(delta)
 
 func creating_item(delta):
-	progress += delta * 100
+	progress += delta * PROGRESS_SPEED
 	emit_signal("progress_changed", progress)
 	
 	if progress >= PROGRESS_MAX:
