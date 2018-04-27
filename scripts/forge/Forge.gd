@@ -4,7 +4,7 @@ signal state_changed
 signal progress_changed
 signal item_created
 
-onready var ForgeGUI = get_node("ForgeGUI")
+onready var ForgeGui = get_node("ForgeGui")
 
 const ForgeState = preload("res://scripts/forge/common/enum/ForgeState.gd")
 
@@ -17,7 +17,7 @@ var state
 var item_in_production = {}
 
 func _ready():
-	ForgeGUI.connect("production_started", self, "_on_ForgeGUI_production_started")
+	ForgeGui.connect("production_started", self, "_on_ForgeGui_production_started")
 	state = ForgeState.IDLE
 	emit_signal("state_changed", state)
 	emit_signal("progress_changed", progress)
@@ -43,7 +43,7 @@ func creating_item(delta):
 		emit_signal("item_created", new_item)
 		set_process(false)
 
-func _on_ForgeGUI_production_started(item):
+func _on_ForgeGui_production_started(item):
 	progress = 0
 	state = ForgeState.CREATING_ITEM
 	item_in_production = item.duplicate()
