@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/forge/gui/main/ForgeGui.gd" type="Script" id=1]
 [ext_resource path="res://scripts/forge/gui/main/state/States.gd" type="Script" id=2]
-[ext_resource path="res://assets/gui_new/bar_back_horizontal.png" type="Texture" id=3]
-[ext_resource path="res://assets/gui_new/bar_green_horizontal.png" type="Texture" id=4]
-[ext_resource path="res://scripts/forge/gui/main/BottomGuiContainer.gd" type="Script" id=5]
+[ext_resource path="res://scripts/forge/gui/main/TopGuiContainer.gd" type="Script" id=3]
+[ext_resource path="res://assets/gui_new/bar_back_horizontal.png" type="Texture" id=4]
+[ext_resource path="res://assets/gui_new/bar_green_horizontal.png" type="Texture" id=5]
+[ext_resource path="res://scripts/forge/gui/main/BottomGuiContainer.gd" type="Script" id=6]
 
-[node name="ForgeGui" type="VBoxContainer"]
+[node name="ForgeGui" type="VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -44,10 +45,12 @@ custom_constants/margin_right = 0
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
+script = ExtResource( 3 )
 _sections_unfolded = [ "Rect", "Size Flags", "custom_constants" ]
 
 [node name="MarginContainer" type="MarginContainer" parent="TopGuiContainer" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -299,9 +302,9 @@ page = 0.0
 value = 50.0
 exp_edit = false
 rounded = false
-texture_under = ExtResource( 3 )
+texture_under = ExtResource( 4 )
 texture_over = null
-texture_progress = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
 radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = true
@@ -310,6 +313,15 @@ stretch_margin_top = 7
 stretch_margin_right = 9
 stretch_margin_bottom = 9
 _sections_unfolded = [ "Rect", "Size Flags", "Textures" ]
+
+[node name="Tween" type="Tween" parent="TopGuiContainer" index="1"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 [node name="CenterGuiContainer" type="MarginContainer" parent="." index="2"]
 
@@ -351,7 +363,7 @@ custom_constants/margin_right = 0
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Size Flags", "custom_constants" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BottomGuiContainer" index="0"]

@@ -5,47 +5,38 @@ signal progress_changed
 signal item_created
 
 onready var ForgeGui = get_node("ForgeGui")
+onready var States = get_node("States")
 
-const ForgeState = preload("res://scripts/forge/common/enum/ForgeState.gd")
-
-const PROGRESS_SPEED = 50
-const PROGRESS_MAX = 100
+const Constants = preload("res://scripts/forge/common/Constants.gd")
 
 var progress = 0
-var state
+
+var states_stack = []
+var forge_state
 
 var item_in_production = {}
 
 func _ready():
 	ForgeGui.connect("production_started", self, "_on_ForgeGui_production_started")
-	state = ForgeState.IDLE
-	emit_signal("state_changed", state)
+	forge_state = States.IDLE
+	states_stack.push_front(States.IdleState.new())
+	emit_signal("state_changed", forge_state)
 	emit_signal("progress_changed", progress)
-	set_process(false)
 
 func _process(delta):
-	match state:
-		ForgeState.IDLE:
-			return
-		ForgeState.CREATING_ITEM:
-			creating_item(delta)
+	if states_stack.front().update(self, delta):
+		states_stack.pop_front().exit(self)
 
-func creating_item(delta):
-	progress += delta * PROGRESS_SPEED
-	emit_signal("progress_changed", progress)
-	
-	if progress >= PROGRESS_MAX:
-		progress = PROGRESS_MAX
-		state = ForgeState.IDLE
-		emit_signal("progress_changed", progress)
-		emit_signal("state_changed", state)
-		var new_item = item_in_production.duplicate()
-		emit_signal("item_created", new_item)
-		set_process(false)
+func set_state(state):
+	var new_state = states_stack.front().handle_input(self, state)
+	if new_state:
+		forge_state = state
+		emit_signal("state_changed", forge_state)
+		states_stack.push_front(new_state)
+		states_stack.front().enter(self)
+		set_process(true)
 
+## == connected signal methods ==
 func _on_ForgeGui_production_started(item):
-	progress = 0
-	state = ForgeState.CREATING_ITEM
-	item_in_production = item.duplicate()
-	emit_signal("state_changed", state)
-	set_process(true)
+	set_state(States.CREATING_ITEM)
+	emit_signal("state_changed", forge_state)

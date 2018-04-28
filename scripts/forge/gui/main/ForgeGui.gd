@@ -2,6 +2,7 @@ extends VBoxContainer
 
 signal production_started
 
+onready var Forge = get_parent()
 onready var States = get_node("States")
 onready var TopGuiContainer = get_node("TopGuiContainer")
 onready var CenterGuiContainer = get_node("CenterGuiContainer")
@@ -15,6 +16,8 @@ var fsm_state
 
 func _ready():
 	BottomGuiContainer.connect("create_item_button_pressed", self, "_on_BottomGuiContainer_create_item_button_pressed")
+	Forge.connect("progress_changed", TopGuiContainer, "_on_Forge_progress_changed")
+	Forge.connect("item_created", TopGuiContainer, "_on_Forge_item_created")
 	state = States.MAIN
 	fsm_state = States.MainState.new()
 
@@ -40,4 +43,8 @@ func _on_BottomGuiContainer_create_item_button_pressed():
 
 # ItemCreationMenu signals
 func _on_ItemCreationMenu_menu_closed():
+	change_state(States.MAIN)
+
+func _on_ItemCreationMenu_item_model_created():
+	emit_signal("production_started", {"name": "Item"})
 	change_state(States.MAIN)

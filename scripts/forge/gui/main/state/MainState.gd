@@ -7,17 +7,17 @@ func handle_input(host, event):
 	return null
 
 func enter(host):
-	print("MAIN_STATE enter()")
+	print("ItemCreationMenu: MAIN state entered")
 	for child in host.TopGuiContainer.get_children():
 		child.visible = true
 	for child in host.BottomGuiContainer.get_children():
 		child.visible = true
 
 func update(host, delta):
-	print("MAIN_STATE update()")
+	print("ItemCreationMenu: MAIN state updating")
 
 func exit(host):
-	print("MAIN_STATE exit()")
+	print("ItemCreationMenu: MAIN state exited")
 	for child in host.TopGuiContainer.get_children():
 		child.visible = false
 	for child in host.BottomGuiContainer.get_children():
