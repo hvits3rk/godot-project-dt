@@ -18,6 +18,7 @@ func _ready():
 	BottomGuiContainer.connect("create_item_button_pressed", self, "_on_BottomGuiContainer_create_item_button_pressed")
 	Forge.connect("progress_changed", TopGuiContainer, "_on_Forge_progress_changed")
 	Forge.connect("item_created", TopGuiContainer, "_on_Forge_item_created")
+	Forge.connect("item_created", self, "_on_Forge_item_created")
 	state = States.MAIN
 	fsm_state = States.MainState.new()
 
@@ -37,9 +38,14 @@ func change_state(new_state):
 	set_process(true)
 
 ## == signal connected methods ==
+# Forge
+func _on_Forge_item_created(item):
+	yield(get_tree().create_timer(1), "timeout")
+	change_state(States.MAIN)
+
 # BottomGuiContainer signals
 func _on_BottomGuiContainer_create_item_button_pressed():
-	change_state(States.ITEM_CREATION)
+	change_state(States.ITEM_CREATION_MENU)
 
 # ItemCreationMenu signals
 func _on_ItemCreationMenu_menu_closed():
@@ -47,4 +53,4 @@ func _on_ItemCreationMenu_menu_closed():
 
 func _on_ItemCreationMenu_item_model_created():
 	emit_signal("production_started", {"name": "Item"})
-	change_state(States.MAIN)
+	change_state(States.ITEM_CREATION_PROCESS)
