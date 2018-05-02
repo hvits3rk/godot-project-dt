@@ -1,1 +1,4 @@
-enum { WEAPON, ARMOR }
+enum {
+	WEAPON,
+	ARMOR
+}

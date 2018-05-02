@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends HBoxContainer
 
 signal item_info_prepaired
 
@@ -7,9 +7,9 @@ const WeaponType = preload("res://scripts/forge/common/enum/WeaponType.gd")
 const ArmorType = preload("res://scripts/forge/common/enum/ArmorType.gd")
 
 onready var ItemInfoContainer = get_node("ItemInfoContainer")
-onready var ItemTypeContainer = get_node("ItemTypeContainer")
-onready var WeaponTypeContainer = get_node("WeaponTypeContainer")
-onready var ArmorTypeContainer = get_node("ArmorTypeContainer")
+onready var ItemTypeContainer = get_node("VBoxContainer/ItemTypeContainer")
+onready var WeaponTypeContainer = get_node("VBoxContainer/WeaponTypeContainer")
+onready var ArmorTypeContainer = get_node("VBoxContainer/ArmorTypeContainer")
 
 # item_name : String
 # item_description : String

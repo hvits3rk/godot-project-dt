@@ -1,4 +1,4 @@
-extends MarginContainer
+extends Control
 
 signal menu_closed
 signal item_model_created
