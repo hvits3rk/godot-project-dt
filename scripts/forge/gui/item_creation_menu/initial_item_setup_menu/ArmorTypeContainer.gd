@@ -12,6 +12,7 @@ onready var PantsButton = get_node("PantsButton")
 onready var BootsButton = get_node("BootsButton")
 
 var button_group
+var pressed_button
 
 func _ready():
 	button_group = ButtonGroup.new()
@@ -36,7 +37,10 @@ func _ready():
 	PantsButton.group = button_group
 	BootsButton.group = button_group
 
+func clear_input():
+	if pressed_button:
+		pressed_button.pressed = false
+
 func _on_ArmorTypeButton_toggled(button_pressed):
-	var pressed_button = button_group.get_pressed_button()
+	pressed_button = button_group.get_pressed_button()
 	emit_signal("armor_type_selected", pressed_button.meta.armor_type)
-	print("{0}".format([pressed_button.meta]))

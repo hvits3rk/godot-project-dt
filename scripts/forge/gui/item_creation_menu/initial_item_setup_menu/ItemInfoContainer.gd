@@ -8,8 +8,8 @@ onready var NameLabel = get_node("NameLabel")
 onready var DescriptionLabel = get_node("DescriptionLabel")
 
 var item_info = {
-	item_name = "",
-	item_description = ""
+	name = "",
+	description = ""
 }
 
 func _ready():
@@ -17,17 +17,14 @@ func _ready():
 	DescriptionInput.connect("focus_exited", self, "_on_DescriptionInput_focus_exited")
 
 func _update_label_color(label, input_text):
-	var color = Color(1, 1, 1) if input_text.length() > 4 else Color(0.96, 0.26, 0.21)
+	var color = Color(0.96, 0.26, 0.21) if input_text.empty() else Color(1, 1, 1)
 	label.set("custom_colors/font_color", color)
 
-func _validate_input():
-	if item_info.item_name.length() > 4:
-		emit_signal("item_info_entered", item_info.duplicate())
-
 func _on_NameInput_text_changed(name_input):
-	item_info.item_name = name_input
+	item_info.name = name_input
 	_update_label_color(NameLabel, name_input)
-	_validate_input()
+	emit_signal("item_info_entered", item_info.duplicate())
 
 func _on_DescriptionInput_focus_exited():
-	item_info.item_description = DescriptionInput.text
+	item_info.description = DescriptionInput.text
+	emit_signal("item_info_entered", item_info.duplicate())

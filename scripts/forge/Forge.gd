@@ -37,6 +37,7 @@ func set_state(state):
 		set_process(true)
 
 ## == connected signal methods ==
-func _on_ForgeGui_production_started(item):
+func _on_ForgeGui_production_started(item_model):
+	item_in_production = item_model.duplicate()
 	set_state(States.CREATING_ITEM)
 	emit_signal("state_changed", forge_state)

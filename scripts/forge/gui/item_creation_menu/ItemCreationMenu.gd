@@ -8,6 +8,8 @@ onready var States = get_node("States")
 onready var ControlMenu = get_node("MarginContainer/VBoxContainer/ControlMenu")
 onready var InitialItemSetupMenu = get_node("MarginContainer/VBoxContainer/InitialItemSetupMenu")
 
+var item_model = {}
+
 var states_stack = []
 var menu_state
 
@@ -15,6 +17,7 @@ func _ready():
 	ControlMenu.connect("cancel_button_pressed", self, "_on_ControlMenu_cancel_button_pressed")
 	ControlMenu.connect("next_button_pressed", self, "_on_ControlMenu_next_button_pressed")
 	ControlMenu.connect("back_button_pressed", self, "_on_ControlMenu_back_button_pressed")
+	InitialItemSetupMenu.connect("item_info_prepaired", self, "_on_InitialItemSetupMenu_item_info_prepaired")
 	menu_state = States.MAIN
 	states_stack.push_front(States.MainState.new())
 
@@ -31,11 +34,24 @@ func set_state(state):
 		set_process(true)
 
 ## == signal connected methods ==
+# ControlMenu
 func _on_ControlMenu_cancel_button_pressed():
 	emit_signal("menu_closed")
 
 func _on_ControlMenu_next_button_pressed():
-	emit_signal("item_model_created")
+	if !item_model.empty():
+		print("ItemCreationMenu:\n==============\n{0}\n==============".format([item_model]))
+		emit_signal("item_model_created", item_model.duplicate())
 
 func _on_ControlMenu_back_button_pressed():
 	pass
+
+# InitialItemSetupMenu
+func _on_InitialItemSetupMenu_item_info_prepaired(formed_item):
+	if formed_item:
+		ControlMenu.NextButton.disabled = false
+		for key in formed_item.keys():
+			item_model[key] = formed_item[key]
+	else:
+		ControlMenu.NextButton.disabled = true
+		item_model.clear()

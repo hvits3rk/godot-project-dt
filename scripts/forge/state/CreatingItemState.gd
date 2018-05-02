@@ -38,6 +38,7 @@ func update(host, delta):
 		host.emit_signal("progress_changed", progress)
 		var new_item = host.item_in_production.duplicate()
 		host.emit_signal("item_created", new_item)
+		print("(Forge)CreatingItemState:\nItem Created\n==============\n{0}\n==============".format([new_item]))
 		return true
 	
 	return false

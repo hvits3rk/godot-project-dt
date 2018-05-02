@@ -9,6 +9,7 @@ onready var AxeButton = get_node("AxeButton")
 onready var HammerButton = get_node("HammerButton")
 
 var button_group
+var pressed_button
 
 func _ready():
 	button_group = ButtonGroup.new()
@@ -21,9 +22,11 @@ func _ready():
 	SwordButton.group = button_group
 	AxeButton.group = button_group
 	HammerButton.group = button_group
-	
+
+func clear_input():
+	if pressed_button:
+		pressed_button.pressed = false
 
 func _on_WeaponTypeButton_toggled(button_pressed):
-	var pressed_button = button_group.get_pressed_button()
+	pressed_button = button_group.get_pressed_button()
 	emit_signal("weapon_type_selected", pressed_button.meta.weapon_type)
-	print("{0}".format([pressed_button.meta]))

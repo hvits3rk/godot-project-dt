@@ -51,6 +51,6 @@ func _on_BottomGuiContainer_create_item_button_pressed():
 func _on_ItemCreationMenu_menu_closed():
 	change_state(States.MAIN)
 
-func _on_ItemCreationMenu_item_model_created():
-	emit_signal("production_started", {"name": "Item"})
+func _on_ItemCreationMenu_item_model_created(item_model):
+	emit_signal("production_started", item_model)
 	change_state(States.ITEM_CREATION_PROCESS)
