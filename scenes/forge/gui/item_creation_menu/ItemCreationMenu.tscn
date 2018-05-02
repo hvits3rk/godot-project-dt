@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/forge/gui/item_creation_menu/ItemCreationMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/forge/gui/item_creation_menu/state/States.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://scripts/forge/gui/item_creation_menu/ControlMenu.gd" type="Script" id=4]
+[ext_resource path="res://scripts/forge/gui/item_creation_menu/initial_item_setup_menu/InitialItemSetupMenu.gd" type="Script" id=3]
+[ext_resource path="res://scripts/forge/gui/item_creation_menu/initial_item_setup_menu/ItemInfoContainer.gd" type="Script" id=4]
+[ext_resource path="res://scripts/forge/gui/item_creation_menu/initial_item_setup_menu/ItemTypeContainer.gd" type="Script" id=5]
+[ext_resource path="res://scenes/forge/gui/component/GuiToggleButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/forge/gui/item_creation_menu/initial_item_setup_menu/WeaponTypeContainer.gd" type="Script" id=7]
+[ext_resource path="res://scripts/forge/gui/item_creation_menu/initial_item_setup_menu/ArmorTypeContainer.gd" type="Script" id=8]
+[ext_resource path="res://scripts/forge/gui/item_creation_menu/ControlMenu.gd" type="Script" id=9]
 
-[node name="ItemCreationMenu" type="MarginContainer"]
+[node name="ItemCreationMenu" type="MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -15,8 +20,8 @@ rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 1
+size_flags_vertical = 1
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
@@ -59,7 +64,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/margin_right = 32
-custom_constants/margin_top = 32
+custom_constants/margin_top = 64
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 _sections_unfolded = [ "custom_constants" ]
@@ -71,7 +76,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 32.0
-margin_top = 32.0
+margin_top = 64.0
 margin_right = 1248.0
 margin_bottom = 688.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -81,6 +86,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
+_sections_unfolded = [ "Size Flags" ]
 
 [node name="InitialItemSetupMenu" type="VBoxContainer" parent="MarginContainer/VBoxContainer" index="0"]
 
@@ -88,63 +94,46 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1216.0
-margin_bottom = 304.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_constants/separation = 32
-alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu" index="0"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1216.0
-margin_bottom = 100.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_constants/separation = 16
-alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/VBoxContainer" index="0"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 408.0
-margin_right = 808.0
-margin_bottom = 42.0
+margin_left = 432.0
+margin_right = 784.0
+margin_bottom = 293.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 4
 size_flags_vertical = 1
+custom_constants/separation = 64
 alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
+script = ExtResource( 3 )
+_sections_unfolded = [ "Size Flags", "Visibility", "custom_constants" ]
 
-[node name="ItemNameLabel" type="Label" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/VBoxContainer/VBoxContainer" index="0"]
+[node name="ItemInfoContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 400.0
+margin_left = 16.0
+margin_right = 336.0
+margin_bottom = 159.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+columns = 1
+script = ExtResource( 4 )
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemInfoContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 320.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -152,21 +141,23 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_colors/font_color = Color( 0.96, 0.262745, 0.211765, 1 )
 text = "Item Name"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "custom_constants" ]
 
-[node name="ItemNameInput" type="LineEdit" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/VBoxContainer/VBoxContainer" index="1"]
+[node name="NameInput" type="LineEdit" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemInfoContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
-margin_right = 400.0
+margin_right = 320.0
 margin_bottom = 42.0
-rect_min_size = Vector2( 400, 0 )
+rect_min_size = Vector2( 320, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -174,44 +165,43 @@ mouse_filter = 0
 mouse_default_cursor_shape = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
-max_length = 255
+max_length = 44
 focus_mode = 2
-context_menu_enabled = true
-placeholder_text = "Item Name"
+context_menu_enabled = false
+placeholder_text = "Name"
 placeholder_alpha = 0.6
 caret_blink = false
 caret_blink_speed = 0.65
 caret_position = 0
-_sections_unfolded = [ "Placeholder", "Rect" ]
+_sections_unfolded = [ "Caret", "Placeholder", "Rect", "Size Flags", "custom_styles" ]
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/VBoxContainer" index="1"]
+[node name="Separation" type="Control" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemInfoContainer" index="2"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 408.0
-margin_top = 58.0
-margin_right = 808.0
-margin_bottom = 100.0
+margin_top = 46.0
+margin_right = 320.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 0, 16 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 4
+size_flags_horizontal = 1
 size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
+_sections_unfolded = [ "Rect" ]
 
-[node name="ItemDescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/VBoxContainer/VBoxContainer2" index="0"]
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemInfoContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 400.0
-margin_bottom = 14.0
+margin_top = 66.0
+margin_right = 320.0
+margin_bottom = 80.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -223,16 +213,16 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="ItemDescriptionInput" type="LineEdit" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/VBoxContainer/VBoxContainer2" index="1"]
+[node name="DescriptionInput" type="TextEdit" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemInfoContainer" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 400.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 400, 0 )
+margin_top = 84.0
+margin_right = 320.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 320, 75 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -240,98 +230,33 @@ mouse_filter = 0
 mouse_default_cursor_shape = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
-max_length = 255
-focus_mode = 2
-context_menu_enabled = true
-placeholder_text = "Item Description"
-placeholder_alpha = 0.6
+text = ""
+readonly = false
+highlight_current_line = false
+syntax_highlighting = false
+show_line_numbers = false
+highlight_all_occurrences = false
+override_selected_font_color = false
+context_menu_enabled = false
+smooth_scrolling = false
+v_scroll_speed = 80.0
+hiding_enabled = 0
+wrap_lines = true
+caret_block_mode = false
 caret_blink = false
 caret_blink_speed = 0.65
-caret_position = 0
-_sections_unfolded = [ "Placeholder", "Rect" ]
+caret_moving_by_right_click = true
+_sections_unfolded = [ "Caret", "Placeholder", "Rect", "Size Flags" ]
 
-[node name="ItemTypeContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu" index="1"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 461.0
-margin_top = 132.0
-margin_right = 755.0
-margin_bottom = 202.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 6
-size_flags_vertical = 1
-custom_constants/separation = 32
-alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
-
-[node name="WeaponItemButton" type="Button" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemTypeContainer" index="0"]
+[node name="ItemTypeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 136.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "WEAPON"
-icon = ExtResource( 3 )
-flat = false
-align = 1
-
-[node name="ArmorItemButton" type="Button" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemTypeContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 168.0
-margin_right = 294.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-disabled = true
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "ARMOR"
-icon = ExtResource( 3 )
-flat = false
-align = 1
-
-[node name="WeaponTypeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu" index="2"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 393.0
-margin_top = 234.0
-margin_right = 822.0
-margin_bottom = 304.0
+margin_top = 223.0
+margin_right = 352.0
+margin_bottom = 293.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -341,93 +266,131 @@ size_flags_vertical = 1
 custom_constants/vseparation = 32
 custom_constants/hseparation = 32
 columns = 4
+script = ExtResource( 5 )
 _sections_unfolded = [ "Size Flags", "custom_constants" ]
 
-[node name="WeaponSwordItemButton" type="Button" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/WeaponTypeContainer" index="0"]
+[node name="WeaponButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemTypeContainer" index="0" instance=ExtResource( 6 )]
 
+margin_right = 160.0
+
+[node name="ArmorButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ItemTypeContainer" index="1" instance=ExtResource( 6 )]
+
+margin_left = 192.0
+margin_right = 352.0
+text = "ARMOR"
+
+[node name="WeaponTypeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu" index="2"]
+
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 127.0
-margin_bottom = 70.0
+margin_left = 11.0
+margin_top = 357.0
+margin_right = 495.0
+margin_bottom = 427.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 4
 size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
+custom_constants/vseparation = 32
+custom_constants/hseparation = 32
+columns = 4
+script = ExtResource( 7 )
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
+
+[node name="SwordButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/WeaponTypeContainer" index="0" instance=ExtResource( 6 )]
+
+margin_right = 140.0
 text = "SWORD"
-icon = ExtResource( 3 )
-flat = false
-align = 1
 
-[node name="WeaponAxeItemButton" type="Button" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/WeaponTypeContainer" index="1"]
+[node name="AxeButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/WeaponTypeContainer" index="1" instance=ExtResource( 6 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 159.0
-margin_right = 261.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-disabled = true
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
+margin_left = 172.0
+margin_right = 312.0
 text = "AXE"
-icon = ExtResource( 3 )
-flat = false
-align = 1
 
-[node name="WeaponHammerItemButton" type="Button" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/WeaponTypeContainer" index="2"]
+[node name="HammerButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/WeaponTypeContainer" index="2" instance=ExtResource( 6 )]
 
+margin_left = 344.0
+margin_right = 484.0
+text = "HAMMER"
+
+[node name="ArmorTypeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu" index="3"]
+
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 293.0
-margin_right = 429.0
-margin_bottom = 70.0
+margin_top = 357.0
+margin_right = 544.0
+margin_bottom = 529.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 4
 size_flags_vertical = 1
-disabled = true
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "HAMMER"
-icon = ExtResource( 3 )
-flat = false
-align = 1
+custom_constants/vseparation = 32
+custom_constants/hseparation = 32
+columns = 3
+script = ExtResource( 8 )
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
+
+[node name="HelmetButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ArmorTypeContainer" index="0" instance=ExtResource( 6 )]
+
+margin_right = 160.0
+text = "HELMET"
+
+[node name="ShoulderButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ArmorTypeContainer" index="1" instance=ExtResource( 6 )]
+
+margin_left = 192.0
+margin_right = 352.0
+text = "SHOULDER"
+
+[node name="ChestplateButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ArmorTypeContainer" index="2" instance=ExtResource( 6 )]
+
+margin_left = 384.0
+margin_right = 544.0
+text = "CHESTPLATE"
+
+[node name="GlovesButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ArmorTypeContainer" index="3" instance=ExtResource( 6 )]
+
+margin_top = 102.0
+margin_right = 160.0
+margin_bottom = 172.0
+text = "GLOVES"
+
+[node name="PantsButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ArmorTypeContainer" index="4" instance=ExtResource( 6 )]
+
+margin_left = 192.0
+margin_top = 102.0
+margin_right = 352.0
+margin_bottom = 172.0
+text = "PANTS"
+
+[node name="BootsButton" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu/ArmorTypeContainer" index="5" instance=ExtResource( 6 )]
+
+margin_left = 384.0
+margin_top = 102.0
+margin_right = 544.0
+margin_bottom = 172.0
+text = "BOOTS"
 
 [node name="ControlMenu" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 596.0
+margin_top = 564.0
 margin_right = 1216.0
-margin_bottom = 656.0
+margin_bottom = 624.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -436,7 +399,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 10
 custom_constants/separation = 32
 alignment = 0
-script = ExtResource( 4 )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Size Flags", "custom_constants" ]
 
 [node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/ControlMenu" index="0"]
@@ -508,6 +471,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+disabled = true
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

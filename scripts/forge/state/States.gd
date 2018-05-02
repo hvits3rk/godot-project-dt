@@ -5,5 +5,5 @@ enum {
 	CREATING_ITEM
 }
 
-var IdleState = preload("res://scripts/forge/state/IdleState.gd")
-var CreatingItemState = preload("res://scripts/forge/state/CreatingItemState.gd")
+const IdleState = preload("res://scripts/forge/state/IdleState.gd")
+const CreatingItemState = preload("res://scripts/forge/state/CreatingItemState.gd")

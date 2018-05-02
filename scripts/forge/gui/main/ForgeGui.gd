@@ -8,7 +8,7 @@ onready var TopGuiContainer = get_node("TopGuiContainer")
 onready var CenterGuiContainer = get_node("CenterGuiContainer")
 onready var BottomGuiContainer = get_node("BottomGuiContainer")
 
-var ItemCreationMenu = preload("res://scenes/forge/gui/ItemCreationMenu.tscn")
+var ItemCreationMenu = preload("res://scenes/forge/gui/item_creation_menu/ItemCreationMenu.tscn")
 var item_creation_menu_instance
 
 var state

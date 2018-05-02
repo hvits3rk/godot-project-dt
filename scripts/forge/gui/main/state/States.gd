@@ -6,6 +6,6 @@ enum {
 	ITEM_CREATION_PROCESS
 }
 
-var MainState = preload("res://scripts/forge/gui/main/state/MainState.gd")
-var ItemCreationMenuState = preload("res://scripts/forge/gui/main/state/ItemCreationMenuState.gd")
-var ItemCreationProcessState = preload("res://scripts/forge/gui/main/state/ItemCreationProcessState.gd")
+const MainState = preload("res://scripts/forge/gui/main/state/MainState.gd")
+const ItemCreationMenuState = preload("res://scripts/forge/gui/main/state/ItemCreationMenuState.gd")
+const ItemCreationProcessState = preload("res://scripts/forge/gui/main/state/ItemCreationProcessState.gd")

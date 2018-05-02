@@ -1,18 +1,10 @@
 extends Node
 
 enum {
+	MAIN,
 	INITIAL_ITEM_SETUP,
 	GRAPHICAL_ITEM_SETUP
 }
 
-func handle_input(host, event):
-	return null
-
-func enter(host):
-	pass
-
-func update(host, delta):
-	pass
-
-func exit(host):
-	pass
+const MainState = preload("res://scripts/forge/gui/item_creation_menu/state/MainState.gd")
+const InitialItemSetupState = preload("res://scripts/forge/gui/item_creation_menu/state/InitialItemSetupState.gd")
