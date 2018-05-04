@@ -4,9 +4,9 @@ signal cancel_button_pressed
 signal next_button_pressed
 signal back_button_pressed
 
-onready var CancelButton = get_node("CancelButton")
-onready var NextButton = get_node("NextButton")
-onready var BackButton = get_node("BackButton")
+onready var CancelButton = find_node("CancelButton")
+onready var NextButton = find_node("NextButton")
+onready var BackButton = find_node("BackButton")
 
 func _ready():
 	CancelButton.connect("pressed", self, "_on_CancelButton_pressed")

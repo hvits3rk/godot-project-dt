@@ -4,9 +4,9 @@ signal weapon_type_selected
 
 const WeaponType = preload("res://scripts/forge/common/enum/WeaponType.gd")
 
-onready var SwordButton = get_node("SwordButton")
-onready var AxeButton = get_node("AxeButton")
-onready var HammerButton = get_node("HammerButton")
+onready var SwordButton = find_node("SwordButton")
+onready var AxeButton = find_node("AxeButton")
+onready var HammerButton = find_node("HammerButton")
 
 var button_group
 var pressed_button

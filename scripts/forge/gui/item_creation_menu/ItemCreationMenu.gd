@@ -2,46 +2,72 @@ extends Control
 
 signal menu_closed
 signal item_model_created
+signal state_changed
 
-onready var ForgeGui = get_parent().get_parent()
+onready var ForgeGui = get_node("/root/Forge/ForgeGui")
 onready var States = get_node("States")
-onready var ControlMenu = get_node("MarginContainer/VBoxContainer/ControlMenu")
-onready var InitialItemSetupMenu = get_node("MarginContainer/VBoxContainer/InitialItemSetupMenu")
+onready var ControlMenu = find_node("ControlMenu")
+onready var InitialItemSetupMenu = find_node("InitialItemSetupMenu")
 
 var item_model = {}
 
 var states_stack = []
-var menu_state
+var current_state
 
 func _ready():
 	ControlMenu.connect("cancel_button_pressed", self, "_on_ControlMenu_cancel_button_pressed")
 	ControlMenu.connect("next_button_pressed", self, "_on_ControlMenu_next_button_pressed")
 	ControlMenu.connect("back_button_pressed", self, "_on_ControlMenu_back_button_pressed")
 	InitialItemSetupMenu.connect("item_info_prepaired", self, "_on_InitialItemSetupMenu_item_info_prepaired")
-	menu_state = States.MAIN
+	current_state = States.MAIN
 	states_stack.push_front(States.MainState.new())
+	states_stack.front().enter(self)
 
 func _process(delta):
 	if states_stack.front().update(self, delta):
-		states_stack.pop_front().exit(self)
+		end_current_state()
 
-func set_state(state):
-	var new_state = states_stack.front().handle_input(self, state)
+func append_state(state):
+	var new_state = states_stack.front().handle_event(self, state)
 	if new_state:
-		menu_state = state
+		current_state = state
 		states_stack.push_front(new_state)
 		states_stack.front().enter(self)
 		set_process(true)
+
+func replace_state(state):
+	var new_state = states_stack.front().handle_event(self, state)
+	if new_state:
+		current_state = state
+		states_stack.pop_front().exit(self)
+		states_stack.push_front(new_state)
+		states_stack.front().enter(self)
+		set_process(true)
+
+func end_current_state():
+	if states_stack.size() <= 1:
+		print("ItemCreationMenu: Cant end current state, states_stack.size(): %d" % states_stack.size())
+		return false
+	states_stack.pop_front().exit(self)
+	states_stack.front().enter(self)
+	return true
+
+func clear_states_stack():
+	while end_current_state():
+		pass
 
 ## == signal connected methods ==
 # ControlMenu
 func _on_ControlMenu_cancel_button_pressed():
 	emit_signal("menu_closed")
+	clear_states_stack()
 
 func _on_ControlMenu_next_button_pressed():
 	if !item_model.empty():
-		print("ItemCreationMenu:\n==============\n{0}\n==============".format([item_model]))
 		emit_signal("item_model_created", item_model.duplicate())
+		
+		## TODO delete
+		clear_states_stack()
 
 func _on_ControlMenu_back_button_pressed():
 	pass

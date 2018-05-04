@@ -2,10 +2,10 @@ extends GridContainer
 
 signal item_info_entered
 
-onready var NameInput = get_node("NameInput")
-onready var DescriptionInput = get_node("DescriptionInput")
-onready var NameLabel = get_node("NameLabel")
-onready var DescriptionLabel = get_node("DescriptionLabel")
+onready var NameInput = find_node("NameInput")
+onready var DescriptionInput = find_node("DescriptionInput")
+onready var NameLabel = find_node("NameLabel")
+onready var DescriptionLabel = find_node("DescriptionLabel")
 
 var item_info = {
 	name = "",
@@ -23,8 +23,8 @@ func _update_label_color(label, input_text):
 func _on_NameInput_text_changed(name_input):
 	item_info.name = name_input
 	_update_label_color(NameLabel, name_input)
-	emit_signal("item_info_entered", item_info.duplicate())
+	emit_signal("item_info_entered", item_info)
 
 func _on_DescriptionInput_focus_exited():
 	item_info.description = DescriptionInput.text
-	emit_signal("item_info_entered", item_info.duplicate())
+	emit_signal("item_info_entered", item_info)

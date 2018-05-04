@@ -6,10 +6,10 @@ const ItemType = preload("res://scripts/forge/common/enum/ItemType.gd")
 const WeaponType = preload("res://scripts/forge/common/enum/WeaponType.gd")
 const ArmorType = preload("res://scripts/forge/common/enum/ArmorType.gd")
 
-onready var ItemInfoContainer = get_node("ItemInfoContainer")
-onready var ItemTypeContainer = get_node("VBoxContainer/ItemTypeContainer")
-onready var WeaponTypeContainer = get_node("VBoxContainer/WeaponTypeContainer")
-onready var ArmorTypeContainer = get_node("VBoxContainer/ArmorTypeContainer")
+onready var ItemInfoContainer = find_node("ItemInfoContainer")
+onready var ItemTypeContainer = find_node("ItemTypeContainer")
+onready var WeaponTypeContainer = find_node("WeaponTypeContainer")
+onready var ArmorTypeContainer = find_node("ArmorTypeContainer")
 
 # item_name : String
 # item_description : String

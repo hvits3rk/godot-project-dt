@@ -47,7 +47,6 @@ _sections_unfolded = [ "Size Flags" ]
 
 [node name="MarginContainer" type="MarginContainer" parent="." index="2"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -66,7 +65,6 @@ _sections_unfolded = [ "Size Flags", "custom_constants" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -86,7 +84,6 @@ _sections_unfolded = [ "Size Flags" ]
 
 [node name="InitialItemSetupMenu" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -106,7 +103,6 @@ _sections_unfolded = [ "custom_constants" ]
 
 [node name="ItemInfoContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/InitialItemSetupMenu" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -237,7 +233,7 @@ context_menu_enabled = false
 smooth_scrolling = false
 v_scroll_speed = 80.0
 hiding_enabled = 0
-wrap_lines = true
+wrap_lines = false
 caret_block_mode = false
 caret_blink = false
 caret_blink_speed = 0.65
@@ -432,7 +428,6 @@ text = "BOOTS"
 
 [node name="ControlMenu" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0

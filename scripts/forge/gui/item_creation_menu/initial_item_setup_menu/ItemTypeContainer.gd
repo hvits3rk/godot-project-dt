@@ -4,8 +4,8 @@ signal item_type_selected
 
 const ItemType = preload("res://scripts/forge/common/enum/ItemType.gd")
 
-onready var WeaponButton = get_node("WeaponButton")
-onready var ArmorButton = get_node("ArmorButton")
+onready var WeaponButton = find_node("WeaponButton")
+onready var ArmorButton = find_node("ArmorButton")
 
 var button_group
 var pressed_button

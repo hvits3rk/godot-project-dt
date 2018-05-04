@@ -1,7 +1,7 @@
 extends MarginContainer
 
 onready var ForgeGui = get_parent()
-onready var ItemCreationProgress = get_node("MarginContainer/VBoxContainer/HBoxContainer/ItemCreationProgress")
+onready var ItemCreationProgress = find_node("ItemCreationProgress")
 onready var Tween = get_node("Tween")
 
 func _ready():

@@ -1,6 +1,6 @@
 extends Node
 
-func handle_input(host, event):
+func handle_event(host, event):
 	match event:
 		host.States.MAIN:
 			return host.States.MainState.new()
@@ -10,6 +10,9 @@ func handle_input(host, event):
 
 func enter(host):
 	print("ForgeGui: ITEM_CREATION_MENU state entered")
+	if host.current_state != host.States.ITEM_CREATION_MENU:
+		host.current_state = host.States.ITEM_CREATION_MENU
+		host.emit_signal("state_changed", host.current_state)
 	host.TopGuiContainer.visible = false
 	host.BottomGuiContainer.visible = false
 	host.item_creation_menu_instance = host.ItemCreationMenu.instance()
@@ -19,6 +22,8 @@ func enter(host):
 
 func update(host, delta):
 	print("ForgeGui: ITEM_CREATION_MENU state updating")
+	host.set_process(false)
+	return false
 
 func exit(host):
 	print("ForgeGui: ITEM_CREATION_MENU state exited")

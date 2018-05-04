@@ -3,7 +3,7 @@ extends Node
 enum {
 	MAIN,
 	ITEM_CREATION_MENU,
-	ITEM_CREATION_PROCESS
+	ITEM_CREATION_PROCESS,
 }
 
 const MainState = preload("res://scripts/forge/gui/main/state/MainState.gd")

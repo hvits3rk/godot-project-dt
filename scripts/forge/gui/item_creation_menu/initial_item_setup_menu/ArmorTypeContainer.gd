@@ -4,12 +4,12 @@ signal armor_type_selected
 
 const ArmorType = preload("res://scripts/forge/common/enum/ArmorType.gd")
 
-onready var HelmetButton = get_node("HelmetButton")
-onready var ShoulderButton = get_node("ShoulderButton")
-onready var ChestplateButton = get_node("ChestplateButton")
-onready var GlovesButton = get_node("GlovesButton")
-onready var PantsButton = get_node("PantsButton")
-onready var BootsButton = get_node("BootsButton")
+onready var HelmetButton = find_node("HelmetButton")
+onready var ShoulderButton = find_node("ShoulderButton")
+onready var ChestplateButton = find_node("ChestplateButton")
+onready var GlovesButton = find_node("GlovesButton")
+onready var PantsButton = find_node("PantsButton")
+onready var BootsButton = find_node("BootsButton")
 
 var button_group
 var pressed_button
