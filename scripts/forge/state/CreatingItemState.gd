@@ -12,8 +12,8 @@ var debug_timer = 0
 
 func handle_event(host, event):
 	match event:
-		host.States.IDLE:
-			return host.States.IdleState.new()
+		host.States.INIT:
+			return host.States.InitState.new()
 	return null
 
 func enter(host):

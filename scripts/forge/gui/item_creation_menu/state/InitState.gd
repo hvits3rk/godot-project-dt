@@ -7,17 +7,17 @@ func handle_event(host, event):
 	return null
 
 func enter(host):
-	print("ItemCreationMenu: MAIN state entered")
-	if host.current_state != host.States.MAIN:
-		host.current_state = host.States.MAIN
+	print("ItemCreationMenu: INIT state entered")
+	if host.current_state != host.States.INIT:
+		host.current_state = host.States.INIT
 		host.emit_signal("state_changed", host.current_state)
 
 
 func update(host, delta):
-	print("ItemCreationMenu: MAIN state updating")
+	print("ItemCreationMenu: INIT state updating")
 	host.set_process(false)
 	host.append_state(host.States.INITIAL_ITEM_SETUP)
 	return false
 
 func exit(host):
-	print("ItemCreationMenu: MAIN state exited")
+	print("ItemCreationMenu: INIT state exited")

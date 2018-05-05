@@ -2,8 +2,8 @@ extends Node
 
 func handle_event(host, event):
 	match event:
-		host.States.MAIN:
-			return host.States.MainState.new()
+		host.States.INIT:
+			return host.States.InitState.new()
 		host.States.ITEM_CREATION_PROCESS:
 			return host.States.ItemCreationProcessState.new()
 	return null

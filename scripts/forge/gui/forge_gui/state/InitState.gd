@@ -7,16 +7,16 @@ func handle_event(host, event):
 	return null
 
 func enter(host):
-	print("ForgeGui: MAIN state entered")
-	if host.current_state != host.States.MAIN:
-		host.current_state = host.States.MAIN
+	print("ForgeGui: INIT state entered")
+	if host.current_state != host.States.INIT:
+		host.current_state = host.States.INIT
 		host.emit_signal("state_changed", host.current_state)
 
 
 func update(host, delta):
-	print("ForgeGui: MAIN state updating")
+	print("ForgeGui: INIT state updating")
 	host.set_process(false)
 	return false
 
 func exit(host):
-	print("ForgeGui: MAIN state exited")
+	print("ForgeGui: INIT state exited")
