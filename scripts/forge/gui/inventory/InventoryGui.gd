@@ -26,19 +26,17 @@ func _on_CloseButton_pressed():
 	emit_signal("inventory_closed")
 
 func _on_Inventory_item_added(item):
-	var new_item = item.duplicate()
-	ItemsContainer.add_item(new_item)
+	ItemsContainer.add_item(item)
 
 func _on_Inventory_item_deleted(item):
-	var deleted_item = item.duplicate()
-	ItemsContainer.remove_item_by_id(deleted_item.id)
+	ItemsContainer.remove_item_by_id(item.id)
 	ItemDetails.visible = false
 
 func _on_DeleteButton_pressed():
 	Inventory.remove_item_by_id(selected_item_meta.id)
 
 func _on_ItemsContainer_item_selected(item_meta):
-	selected_item_meta = item_meta.duplicate()
+	selected_item_meta = item_meta
 	ItemDetails.visible = true
 	ItemDetails.NameLabel.text = item_meta.item_name
 	ItemDetails.DescriptionLabel.text = item_meta.item_description

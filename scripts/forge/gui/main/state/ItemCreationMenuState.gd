@@ -30,4 +30,4 @@ func exit(host):
 	host.TopGuiContainer.visible = true
 	host.BottomGuiContainer.visible = true
 	host.item_creation_menu_instance.visible = false
-	host.item_creation_menu_instance = host.item_creation_menu_instance.queue_free()
+	host.item_creation_menu_instance.queue_free()

@@ -39,7 +39,9 @@ func replace_state(state):
 	var new_state = states_stack.front().handle_event(self, state)
 	if new_state:
 		current_state = state
-		states_stack.pop_front().exit(self)
+		var exited_state = states_stack.pop_front()
+		exited_state.exit(self)
+		exited_state.queue_free()
 		states_stack.push_front(new_state)
 		states_stack.front().enter(self)
 		set_process(true)
@@ -48,7 +50,9 @@ func end_current_state():
 	if states_stack.size() <= 1:
 		print("ItemCreationMenu: Cant end current state, states_stack.size(): %d" % states_stack.size())
 		return false
-	states_stack.pop_front().exit(self)
+	var exited_state = states_stack.pop_front()
+	exited_state.exit(self)
+	exited_state.queue_free()
 	states_stack.front().enter(self)
 	return true
 
@@ -60,14 +64,10 @@ func clear_states_stack():
 # ControlMenu
 func _on_ControlMenu_cancel_button_pressed():
 	emit_signal("menu_closed")
-	clear_states_stack()
 
 func _on_ControlMenu_next_button_pressed():
 	if !item_model.empty():
-		emit_signal("item_model_created", item_model.duplicate())
-		
-		## TODO delete
-		clear_states_stack()
+		emit_signal("item_model_created", item_model)
 
 func _on_ControlMenu_back_button_pressed():
 	pass
@@ -81,3 +81,9 @@ func _on_InitialItemSetupMenu_item_info_prepaired(formed_item):
 	else:
 		ControlMenu.NextButton.disabled = true
 		item_model.clear()
+
+func _exit_tree():
+	clear_states_stack()
+	var exited_state = states_stack.pop_front()
+	exited_state.exit(self)
+	exited_state.queue_free()

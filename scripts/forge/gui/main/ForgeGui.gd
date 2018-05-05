@@ -42,7 +42,9 @@ func replace_state(state):
 	var new_state = states_stack.front().handle_event(self, state)
 	if new_state:
 		current_state = state
-		states_stack.pop_front().exit(self)
+		var exited_state = states_stack.pop_front()
+		exited_state.exit(self)
+		exited_state.queue_free()
 		states_stack.push_front(new_state)
 		states_stack.front().enter(self)
 		set_process(true)
@@ -51,7 +53,9 @@ func end_current_state():
 	if states_stack.size() <= 1:
 		print("ForgeGui: Cant end current state, states_stack.size(): %d" % states_stack.size())
 		return false
-	states_stack.pop_front().exit(self)
+	var exited_state = states_stack.pop_front()
+	exited_state.exit(self)
+	exited_state.queue_free()
 	states_stack.front().enter(self)
 	return true
 
@@ -87,3 +91,9 @@ func _on_ItemCreationMenu_menu_closed():
 func _on_ItemCreationMenu_item_model_created(item_model):
 	emit_signal("production_started", item_model)
 	replace_state(States.ITEM_CREATION_PROCESS)
+
+func _exit_tree():
+	clear_states_stack()
+	var exited_state = states_stack.pop_front()
+	exited_state.exit(self)
+	exited_state.queue_free()

@@ -23,5 +23,4 @@ func remove_item_by_id(item_id):
 			return
 
 func _on_Forge_item_created(item):
-	var new_item = item.duplicate()
-	add_item(new_item)
+	add_item(item.duplicate())

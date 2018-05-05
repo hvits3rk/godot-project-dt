@@ -41,7 +41,7 @@ func update(host, delta):
 	if progress >= Constants.PROGRESS_MAX:
 		progress = Constants.PROGRESS_MAX
 		host.emit_signal("progress_changed", progress)
-		var new_item = host.item_in_production.duplicate()
+		var new_item = host.item_in_production
 		new_item.created_date = OS.get_datetime(true)
 		new_item.id = new_item.hash()
 		host.emit_signal("item_created", new_item)

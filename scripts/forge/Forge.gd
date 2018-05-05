@@ -39,7 +39,9 @@ func replace_state(state):
 	var new_state = states_stack.front().handle_event(self, state)
 	if new_state:
 		current_state = state
-		states_stack.pop_front().exit(self)
+		var exited_state = states_stack.pop_front()
+		exited_state.exit(self)
+		exited_state.queue_free()
 		states_stack.push_front(new_state)
 		states_stack.front().enter(self)
 		set_process(true)
@@ -48,10 +50,22 @@ func end_current_state():
 	if states_stack.size() <= 1:
 		print("Forge: Cant end current state, states_stack.size(): %d" % states_stack.size())
 		return
-	states_stack.pop_front().exit(self)
+	var exited_state = states_stack.pop_front()
+	exited_state.exit(self)
+	exited_state.queue_free()
 	states_stack.front().enter(self)
+
+func clear_states_stack():
+	while end_current_state():
+		pass
 
 ## == connected signal methods ==
 func _on_ForgeGui_production_started(item_model):
 	item_in_production = item_model.duplicate()
 	append_state(States.CREATING_ITEM)
+
+func _exit_tree():
+	clear_states_stack()
+	var exited_state = states_stack.pop_front()
+	exited_state.exit(self)
+	exited_state.queue_free()

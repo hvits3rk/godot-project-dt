@@ -10,10 +10,10 @@ var inventory_item_buttons = []
 func _ready():
 	button_group = ButtonGroup.new()
 
-func add_item(item_meta):
+func add_item(item):
 	var item_button = InventoryItemButton.instance()
-	item_button.meta = item_meta.duplicate()
-	item_button.text = item_meta.item_name
+	item_button.meta = item.duplicate()
+	item_button.text = item.item_name
 	item_button.group = button_group
 	item_button.connect("toggled", self, "_on_InventoryItemButton_toggled")
 	inventory_item_buttons.append(item_button)
@@ -35,8 +35,8 @@ func clear_inventory():
 func refresh_inventory(items):
 	clear_inventory()
 	for item in items:
-		add_item(item.duplicate())
+		add_item(item)
 
 func _on_InventoryItemButton_toggled(button_pressed):
 	var pressed_item = button_group.get_pressed_button()
-	emit_signal("item_selected", pressed_item.meta.duplicate())
+	emit_signal("item_selected", pressed_item.meta)
