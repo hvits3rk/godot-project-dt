@@ -1,9 +1,10 @@
-extends "res://scripts/PushDownAutomata.gd"
+extends Control
 
 signal menu_closed
 signal item_model_created
-signal state_changed
 
+onready var PDA = get_node("ItemCreationMenuPDA")
+onready var States = get_node("ItemCreationMenuPDA/States")
 onready var ForgeGui = get_node("/root/Forge/ForgeGui")
 onready var ControlMenu = find_node("ControlMenu")
 onready var InitialItemSetupMenu = find_node("InitialItemSetupMenu")

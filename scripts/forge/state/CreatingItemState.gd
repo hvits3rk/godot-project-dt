@@ -1,27 +1,32 @@
 extends Node
 
+onready var States = get_parent()
+onready var PDA = States.get_parent()
+
 const Constants = preload("res://scripts/forge/common/Constants.gd")
 
 var progress
-var progress_chunk_timer = 0
+var progress_chunk_timer
 
 ## DEBUG
 const DEBUG_DELAY = 2
-var debug_timer = 0
+var debug_timer
 ##
 
 func handle_event(host, event):
 	match event:
-		host.States.INIT:
-			return host.States.InitState.new()
+		States.INIT:
+			return States.InitState
 	return null
 
 func enter(host):
 	print("Forge: CREATING_ITEM state entered")
-	if host.current_state != host.States.CREATING_ITEM:
-		host.current_state = host.States.CREATING_ITEM
-		host.emit_signal("state_changed", host.current_state)
+	if PDA.current_state != States.CREATING_ITEM:
+		PDA.current_state = States.CREATING_ITEM
+		PDA.emit_signal("state_changed", PDA.current_state)
 	progress = host.progress
+	progress_chunk_timer = 0
+	debug_timer = 0
 
 func update(host, delta):
 	## DEBUG

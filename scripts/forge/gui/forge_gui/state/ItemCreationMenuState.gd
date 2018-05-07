@@ -1,18 +1,21 @@
 extends Node
 
+onready var States = get_parent()
+onready var PDA = States.get_parent()
+
 func handle_event(host, event):
 	match event:
-		host.States.INIT:
-			return host.States.InitState.new()
-		host.States.ITEM_CREATION_PROCESS:
-			return host.States.ItemCreationProcessState.new()
+		States.INIT:
+			return States.InitState
+		States.ITEM_CREATION_PROCESS:
+			return States.ItemCreationProcessState
 	return null
 
 func enter(host):
 	print("ForgeGui: ITEM_CREATION_MENU state entered")
-	if host.current_state != host.States.ITEM_CREATION_MENU:
-		host.current_state = host.States.ITEM_CREATION_MENU
-		host.emit_signal("state_changed", host.current_state)
+	if PDA.current_state != States.ITEM_CREATION_MENU:
+		PDA.current_state = States.ITEM_CREATION_MENU
+		PDA.emit_signal("state_changed", PDA.current_state)
 	host.TopGuiContainer.visible = false
 	host.BottomGuiContainer.visible = false
 	host.item_creation_menu_instance = host.ItemCreationMenu.instance()
@@ -22,7 +25,7 @@ func enter(host):
 
 func update(host, delta):
 	print("ForgeGui: ITEM_CREATION_MENU state updating")
-	host.set_process(false)
+	PDA.set_process(false)
 	return false
 
 func exit(host):

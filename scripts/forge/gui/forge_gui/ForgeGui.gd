@@ -1,9 +1,10 @@
-extends "res://scripts/PushDownAutomata.gd"
+extends VBoxContainer
 
 signal production_started
-signal state_changed
 
 onready var Forge = get_parent()
+onready var PDA = get_node("ForgeGuiPDA")
+onready var States = get_node("ForgeGuiPDA/States")
 onready var TopGuiContainer = find_node("TopGuiContainer")
 onready var CenterGuiContainer = find_node("CenterGuiContainer")
 onready var BottomGuiContainer = find_node("BottomGuiContainer")
@@ -23,11 +24,11 @@ func _ready():
 # Forge
 func _on_Forge_item_created(item):
 	yield(get_tree().create_timer(1), "timeout")
-	end_current_state()
+	PDA.end_current_state()
 
 # BottomGuiContainer
 func _on_BottomGuiContainer_create_item_button_pressed():
-	append_state(States.ITEM_CREATION_MENU)
+	PDA.append_state(States.ITEM_CREATION_MENU)
 
 func _on_BottomGuiContainer_inventory_opened():
 	TopGuiContainer.visible = false
@@ -42,8 +43,8 @@ func _on_CenterGuiContainer_inventory_closed():
 
 # ItemCreationMenu
 func _on_ItemCreationMenu_menu_closed():
-	end_current_state()
+	PDA.end_current_state()
 
 func _on_ItemCreationMenu_item_model_created(item_model):
 	emit_signal("production_started", item_model)
-	replace_state(States.ITEM_CREATION_PROCESS)
+	PDA.replace_state(States.ITEM_CREATION_PROCESS)

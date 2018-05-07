@@ -1,10 +1,11 @@
-extends "res://scripts/PushDownAutomata.gd"
+extends Node
 
-signal state_changed
 signal progress_changed
 signal item_created
 
 onready var ForgeGui = get_node("ForgeGui")
+onready var PDA = get_node("ForgePDA")
+onready var States = get_node("ForgePDA/States")
 
 const Constants = preload("res://scripts/forge/common/Constants.gd")
 
@@ -19,4 +20,4 @@ func _ready():
 ## == connected signal methods ==
 func _on_ForgeGui_production_started(item_model):
 	item_in_production = item_model.duplicate()
-	append_state(States.CREATING_ITEM)
+	PDA.append_state(States.CREATING_ITEM)

@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/forge/gui/inventory/items_container/ItemsContainer.gd" type="Script" id=2]
 [ext_resource path="res://scripts/forge/gui/inventory/ItemDetails.gd" type="Script" id=3]
 
-[node name="InventoryGui" type="MarginContainer" index="0"]
+[node name="InventoryGui" type="MarginContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
