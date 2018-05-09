@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/theme/forge_gui.theme" type="Theme" id=1]
 [ext_resource path="res://scripts/forge/gui/forge_gui/ForgeGui.gd" type="Script" id=2]
@@ -7,62 +7,6 @@
 [ext_resource path="res://scripts/forge/gui/forge_gui/CenterGuiContainer.gd" type="Script" id=5]
 [ext_resource path="res://scenes/forge/gui/inventory/InventoryGui.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/forge/gui/forge_gui/BottomGuiContainer.gd" type="Script" id=7]
-
-[sub_resource type="GDScript" id=1]
-
-script/source = "extends Node
-
-signal state_changed
-
-var states_stack = []
-var current_state
-
-onready var States = get_node(\"States\")
-onready var Host = get_parent()
-
-func _ready():
-	current_state = States.INIT
-	states_stack.push_front(States.InitState)
-	states_stack.front().enter(Host)
-
-func _process(delta):
-	if states_stack.front().update(Host, delta):
-		end_current_state()
-
-func append_state(state):
-	var new_state = states_stack.front().handle_event(Host, state)
-	if new_state:
-		current_state = state
-		states_stack.push_front(new_state)
-		states_stack.front().enter(Host)
-		set_process(true)
-
-func replace_state(state):
-	var new_state = states_stack.front().handle_event(Host, state)
-	if new_state:
-		current_state = state
-		var exited_state = states_stack.pop_front()
-		exited_state.exit(Host)
-		states_stack.push_front(new_state)
-		states_stack.front().enter(Host)
-		set_process(true)
-
-func end_current_state():
-	if states_stack.size() <= 1:
-		return
-	var exited_state = states_stack.pop_front()
-	exited_state.exit(Host)
-	states_stack.front().enter(Host)
-
-func clear_states_stack():
-	while end_current_state():
-		pass
-
-func _exit_tree():
-	clear_states_stack()
-	var exited_state = states_stack.pop_front()
-	exited_state.exit(Host)
-"
 
 [node name="ForgeGui" type="VBoxContainer"]
 
@@ -82,8 +26,6 @@ script = ExtResource( 2 )
 _sections_unfolded = [ "Rect", "Size Flags", "Theme", "custom_constants" ]
 
 [node name="ForgeGuiPDA" parent="." index="0" instance=ExtResource( 3 )]
-
-script = SubResource( 1 )
 
 [node name="TopGuiContainer" type="MarginContainer" parent="." index="1"]
 

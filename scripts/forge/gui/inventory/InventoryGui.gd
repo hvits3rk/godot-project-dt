@@ -37,6 +37,9 @@ func _on_DeleteButton_pressed():
 
 func _on_ItemsContainer_item_selected(item_meta):
 	selected_item_meta = item_meta
+	ItemDetails.SwordViewContainer.set_grip_resource(selected_item_meta.texture.grip)
+	ItemDetails.SwordViewContainer.set_guard_resource(selected_item_meta.texture.guard)
+	ItemDetails.SwordViewContainer.set_blade_resource(selected_item_meta.texture.blade)
 	ItemDetails.visible = true
 	ItemDetails.NameLabel.text = item_meta.item_name
 	ItemDetails.DescriptionLabel.text = item_meta.item_description

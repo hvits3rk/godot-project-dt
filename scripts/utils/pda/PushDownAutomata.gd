@@ -20,6 +20,8 @@ func _process(delta):
 func append_state(state):
 	var new_state = states_stack.front().handle_event(Host, state)
 	if new_state:
+		states_stack.front().exit(Host)
+		print(states_stack.front())
 		current_state = state
 		states_stack.push_front(new_state)
 		states_stack.front().enter(Host)
@@ -41,12 +43,13 @@ func end_current_state():
 	var exited_state = states_stack.pop_front()
 	exited_state.exit(Host)
 	states_stack.front().enter(Host)
+	set_process(true)
 
 func clear_states_stack():
 	while end_current_state():
 		pass
 
-func _exit_tree():
-	clear_states_stack()
-	var exited_state = states_stack.pop_front()
-	exited_state.exit(Host)
+#func _exit_tree():
+#	clear_states_stack()
+#	var exited_state = states_stack.pop_front()
+#	exited_state.exit(Host)

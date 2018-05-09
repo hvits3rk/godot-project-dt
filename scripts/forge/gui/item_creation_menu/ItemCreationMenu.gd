@@ -3,6 +3,10 @@ extends Control
 signal menu_closed
 signal item_model_created
 
+const ItemType = preload("res://scripts/forge/common/enum/ItemType.gd")
+const WeaponType = preload("res://scripts/forge/common/enum/WeaponType.gd")
+const ArmorType = preload("res://scripts/forge/common/enum/ArmorType.gd")
+
 onready var PDA = get_node("ItemCreationMenuPDA")
 onready var States = get_node("ItemCreationMenuPDA/States")
 onready var ForgeGui = get_node("/root/Forge/ForgeGui")
@@ -23,11 +27,10 @@ func _on_ControlMenu_cancel_button_pressed():
 	emit_signal("menu_closed")
 
 func _on_ControlMenu_next_button_pressed():
-	if !item_model.empty():
-		emit_signal("item_model_created", item_model)
+	PDA.append_state(States.NEXT_MENU)
 
 func _on_ControlMenu_back_button_pressed():
-	pass
+	PDA.append_state(States.PREV_MENU)
 
 # InitialItemSetupMenu
 func _on_InitialItemSetupMenu_item_info_prepaired(formed_item):

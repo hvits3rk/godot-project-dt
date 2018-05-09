@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/utils/pda/PushDownAutomata.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/forge/gui/item_creation_menu/state/InitialItemSetupState.gd" type="Script" id=2]
+[ext_resource path="res://scripts/forge/gui/item_creation_menu/state/SwordStylingMenuState.gd" type="Script" id=3]
+[ext_resource path="res://scripts/forge/gui/item_creation_menu/state/CollectAndEmitDataState.gd" type="Script" id=4]
 
 [sub_resource type="GDScript" id=1]
 
@@ -9,12 +11,17 @@ script/source = "extends Node
 
 enum {
 	INIT,
+	NEXT_MENU,
+	PREV_MENU,
+	COLLECT_AND_EMIT_DATA,
 	INITIAL_ITEM_SETUP,
-	GRAPHICAL_ITEM_SETUP
+	SWORD_STYLING_MENU,
 }
 
 onready var InitState = get_node(\"InitState\")
-onready var InitialItemSetupState = get_node(\"InitialItemSetupState\")"
+onready var CollectAndEmitDataState = get_node(\"CollectAndEmitDataState\")
+onready var InitialItemSetupState = get_node(\"InitialItemSetupState\")
+onready var SwordStylingMenuState = get_node(\"SwordStylingMenuState\")"
 
 [sub_resource type="GDScript" id=2]
 
@@ -57,5 +64,13 @@ script = SubResource( 2 )
 [node name="InitialItemSetupState" type="Node" parent="States" index="1"]
 
 script = ExtResource( 2 )
+
+[node name="SwordStylingMenuState" type="Node" parent="States" index="2"]
+
+script = ExtResource( 3 )
+
+[node name="CollectAndEmitDataState" type="Node" parent="States" index="3"]
+
+script = ExtResource( 4 )
 
 
