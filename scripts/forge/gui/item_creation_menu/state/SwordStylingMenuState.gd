@@ -30,6 +30,8 @@ func update(host, delta):
 func exit(host):
 	print("ItemCreationMenu: SWORD_STYLING_MENU state exited")
 	SwordStylingMenu.visible = false
+	if !Host.item_model.has("texture"):
+		Host.item_model.texture = SwordStylingMenu.selected_parts
 	if !SwordStylingMenu.is_connected("parts_selected", self, "_on_SwordStylingMenu_parts_selected"):
 		SwordStylingMenu.disconnect("parts_selected", self, "_on_SwordStylingMenu_parts_selected")
 

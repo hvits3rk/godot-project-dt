@@ -21,5 +21,4 @@ func add_button(item_part, res):
 
 func _on_Button_toggled(button_pressed):
 	var pressed_button = button_group.get_pressed_button()
-	print(pressed_button.meta)
 	emit_signal("grip_selected", pressed_button.meta)

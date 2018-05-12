@@ -21,7 +21,6 @@ func append_state(state):
 	var new_state = states_stack.front().handle_event(Host, state)
 	if new_state:
 		states_stack.front().exit(Host)
-		print(states_stack.front())
 		current_state = state
 		states_stack.push_front(new_state)
 		states_stack.front().enter(Host)

@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/forge/gui/component/SwordViewContainer.gd" type="Script" id=1]
-[ext_resource path="res://assets/item/weapon/sword/grip/grip-1.png" type="Texture" id=2]
-[ext_resource path="res://assets/item/weapon/sword/guard/guard-1.png" type="Texture" id=3]
-[ext_resource path="res://assets/item/weapon/sword/blade/blade-1.png" type="Texture" id=4]
+[ext_resource path="res://assets/item/weapon/sword/pommel/pommel-1.png" type="Texture" id=2]
+[ext_resource path="res://assets/item/weapon/sword/grip/grip-1.png" type="Texture" id=3]
+[ext_resource path="res://assets/item/weapon/sword/guard/guard-1.png" type="Texture" id=4]
+[ext_resource path="res://assets/item/weapon/sword/blade/blade-1.png" type="Texture" id=5]
 
 [node name="SwordViewContainer" type="MarginContainer"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -28,7 +28,7 @@ custom_constants/margin_bottom = 0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Size Flags", "custom_constants" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="." index="0"]
+[node name="PommelMargin" type="MarginContainer" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -48,7 +48,7 @@ custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 _sections_unfolded = [ "custom_constants" ]
 
-[node name="GripTexture" type="TextureRect" parent="MarginContainer" index="0"]
+[node name="PommelTexture" type="TextureRect" parent="PommelMargin" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -63,10 +63,9 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 texture = ExtResource( 2 )
-stretch_mode = 3
-_sections_unfolded = [ "Rect", "Size Flags" ]
+stretch_mode = 0
 
-[node name="MarginContainer2" type="MarginContainer" parent="." index="1"]
+[node name="GripMargin" type="MarginContainer" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -82,29 +81,30 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
-custom_constants/margin_left = 0
+custom_constants/margin_left = 40
 custom_constants/margin_bottom = 0
 _sections_unfolded = [ "custom_constants" ]
 
-[node name="GuardTexture" type="TextureRect" parent="MarginContainer2" index="0"]
+[node name="GripTexture" type="TextureRect" parent="GripMargin" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 800.0
+margin_left = 40.0
+margin_right = 140.0
 margin_bottom = 140.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 0
 size_flags_vertical = 1
 texture = ExtResource( 3 )
 stretch_mode = 3
-_sections_unfolded = [ "Rect", "Size Flags" ]
+_sections_unfolded = [ "Size Flags" ]
 
-[node name="MarginContainer3" type="MarginContainer" parent="." index="2"]
+[node name="GuardMargin" type="MarginContainer" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -120,27 +120,66 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
-custom_constants/margin_left = 200
+custom_constants/margin_left = 140
 custom_constants/margin_bottom = 0
 _sections_unfolded = [ "custom_constants" ]
 
-[node name="BladeTexture" type="TextureRect" parent="MarginContainer3" index="0"]
+[node name="GuardTexture" type="TextureRect" parent="GuardMargin" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 200.0
-margin_right = 800.0
+margin_left = 140.0
+margin_right = 150.0
 margin_bottom = 140.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 0
 size_flags_vertical = 1
 texture = ExtResource( 4 )
 stretch_mode = 3
-_sections_unfolded = [ "Margin", "Rect", "Size Flags" ]
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="BladeMargin" type="MarginContainer" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 800.0
+margin_bottom = 140.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 150
+custom_constants/margin_bottom = 0
+_sections_unfolded = [ "custom_constants" ]
+
+[node name="BladeTexture" type="TextureRect" parent="BladeMargin" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 150.0
+margin_right = 550.0
+margin_bottom = 140.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+texture = ExtResource( 5 )
+stretch_mode = 3
+_sections_unfolded = [ "Size Flags" ]
 
 

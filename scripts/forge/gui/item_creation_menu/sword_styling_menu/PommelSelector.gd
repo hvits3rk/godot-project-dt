@@ -1,6 +1,6 @@
 extends GridContainer
 
-signal guard_selected
+signal pommel_selected
 
 const GuiToggleButton = preload("res://scenes/forge/gui/component/GuiToggleButton.tscn")
 
@@ -21,4 +21,4 @@ func add_button(item_part, res):
 
 func _on_Button_toggled(button_pressed):
 	var pressed_button = button_group.get_pressed_button()
-	emit_signal("guard_selected", pressed_button.meta)
+	emit_signal("pommel_selected", pressed_button.meta)
