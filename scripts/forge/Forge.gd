@@ -7,8 +7,6 @@ onready var ForgeGui = get_node("ForgeGui")
 onready var PDA = get_node("ForgePDA")
 onready var States = get_node("ForgePDA/States")
 
-const Constants = preload("res://scripts/forge/common/Constants.gd")
-
 var progress = 0
 
 var item_in_production = {}

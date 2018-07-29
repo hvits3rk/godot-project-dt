@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-signal styling_type_selected
+signal styling_type_selected(selected_type)
 
 onready var PommelButton = find_node("PommelButton")
 onready var GripButton = find_node("GripButton")
@@ -13,10 +13,10 @@ var button_group
 
 func _ready():
 	button_group = ButtonGroup.new()
-	PommelButton.meta = { name = "pommel" }
-	GripButton.meta = { name = "grip" }
-	GuardButton.meta = { name = "guard" }
-	BladeButton.meta = { name = "blade" }
+	PommelButton.meta = { part = WeaponPart.POMMEL }
+	GripButton.meta = { part = WeaponPart.GRIP }
+	GuardButton.meta = { part = WeaponPart.GUARD }
+	BladeButton.meta = { part = WeaponPart.BLADE }
 	PommelButton.group = button_group
 	GripButton.group = button_group
 	GuardButton.group = button_group
@@ -28,4 +28,4 @@ func _ready():
 
 func _on_Button_toggled(button_pressed):
 	var toggled_button_meta = button_group.get_pressed_button().meta
-	emit_signal("styling_type_selected", toggled_button_meta)
+	emit_signal("styling_type_selected", toggled_button_meta.part)

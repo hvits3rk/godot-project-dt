@@ -1,7 +1,7 @@
 extends Control
 
 signal menu_closed
-signal item_model_created
+signal item_model_created(item_model)
 
 const ItemType = preload("res://scripts/forge/common/enum/ItemType.gd")
 const WeaponType = preload("res://scripts/forge/common/enum/WeaponType.gd")

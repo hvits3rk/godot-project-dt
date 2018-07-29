@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-signal item_info_prepaired
+signal item_info_prepaired(formed_item)
 
 const ItemType = preload("res://scripts/forge/common/enum/ItemType.gd")
 const WeaponType = preload("res://scripts/forge/common/enum/WeaponType.gd")

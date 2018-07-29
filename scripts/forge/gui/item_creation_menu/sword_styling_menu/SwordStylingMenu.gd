@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-signal parts_selected
+signal parts_selected(selected_parts)
 
 onready var SwordViewContainer = find_node("SwordViewContainer")
 onready var StylingTypeControl = find_node("StylingTypeControl")
@@ -21,7 +21,7 @@ var selected_parts = {
 }
 
 func _ready():
-	_load_resources_from("res://assets/item/weapon/sword", sword_parts)
+	Utils._load_resources_from("res://assets/item/weapon/sword", sword_parts)
 	StylingTypeControl.connect("styling_type_selected", self, "_on_StylingTypeControl_styling_type_selected")
 	PommelSelector.connect("pommel_selected", self, "_on_PommelSelector_pommel_selected")
 	GripSelector.connect("grip_selected", self, "_on_GripSelector_grip_selected")
@@ -45,42 +45,24 @@ func _ready():
 	selected_parts.blade = sword_parts.blade[0]
 	emit_signal("parts_selected", selected_parts)
 
-func _load_resources_from(path, dict = {}, curr_dir = ""):
-	var dir = Directory.new()
-	if dir.open(path) == OK:
-		dir.list_dir_begin(true, true)
-		var file_name = dir.get_next()
-		while (file_name != ""):
-			if dir.current_is_dir():
-				dict[file_name] = []
-				_load_resources_from(dir.get_current_dir() + "/" + file_name, dict, file_name)
-			else:
-				if !file_name.ends_with(".import"):
-					var resource = dir.get_current_dir() + "/" + file_name
-					var texture = load(resource)
-					dict[curr_dir].append(resource)
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
-
 func _on_StylingTypeControl_styling_type_selected(selected_type):
-	match selected_type.name:
-		"pommel":
+	match selected_type:
+		WeaponPart.POMMEL:
 			PommelSelector.visible = true
 			GripSelector.visible = false
 			GuardSelector.visible = false
 			BladeSelector.visible = false
-		"grip":
+		WeaponPart.GRIP:
 			GripSelector.visible = true
 			PommelSelector.visible = false
 			GuardSelector.visible = false
 			BladeSelector.visible = false
-		"guard":
+		WeaponPart.GUARD:
 			GuardSelector.visible = true
 			PommelSelector.visible = false
 			GripSelector.visible = false
 			BladeSelector.visible = false
-		"blade":
+		WeaponPart.BLADE:
 			BladeSelector.visible = true
 			PommelSelector.visible = false
 			GripSelector.visible = false

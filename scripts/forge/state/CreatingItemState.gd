@@ -29,12 +29,12 @@ func enter(host):
 	debug_timer = 0
 
 func update(host, delta):
-	## DEBUG
+	## TODO: delete
 	debug_timer -= delta
 	if debug_timer <= 0:
 		debug_timer = DEBUG_DELAY
 		print("Forge: CREATING_ITEM state updating")
-	## DEBUG
+	####
 	
 	progress += delta * Constants.PROGRESS_SPEED
 	progress_chunk_timer += delta * Constants.PROGRESS_SPEED

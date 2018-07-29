@@ -14,6 +14,10 @@ config/name="DwarfTrader"
 run/main_scene="res://scenes/forge/Forge.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Utils="*res://scripts/utils/Utils.gd"
+
 [debug]
 
 settings/fps/force_fps=60

@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/forge/gui/inventory/ItemDetails.gd" type="Script" id=3]
 [ext_resource path="res://scenes/forge/gui/component/SwordViewContainer.tscn" type="PackedScene" id=4]
 
-[node name="InventoryGui" type="MarginContainer" index="0"]
+[node name="InventoryGui" type="MarginContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -136,6 +136,7 @@ scroll_horizontal_enabled = false
 scroll_horizontal = 0
 scroll_vertical_enabled = true
 scroll_vertical = 0
+scroll_deadzone = 0
 _sections_unfolded = [ "Margin", "Scroll", "Size Flags" ]
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/ScrollContainer" index="0"]
@@ -227,7 +228,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 33.0
 margin_right = 583.0
-margin_bottom = 432.0
+margin_bottom = 440.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -405,6 +406,7 @@ scroll_horizontal_enabled = true
 scroll_horizontal = 0
 scroll_vertical_enabled = true
 scroll_vertical = 0
+scroll_deadzone = 0
 _sections_unfolded = [ "Rect" ]
 
 [node name="DescriptionLabel" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/VBoxContainer/ItemDetails/VBoxContainer/MarginContainer/ScrollContainer" index="0"]
@@ -558,7 +560,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 384.0
 margin_right = 550.0
-margin_bottom = 424.0
+margin_bottom = 440.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
