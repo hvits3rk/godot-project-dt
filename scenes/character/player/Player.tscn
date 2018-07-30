@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/character/Player.gd" type="Script" id=2]
+[ext_resource path="res://scripts/character/player/debug/StateLabel.gd" type="Script" id=3]
+[ext_resource path="res://scripts/character/player/states/Idle.gd" type="Script" id=4]
+[ext_resource path="res://scripts/character/player/states/Walk.gd" type="Script" id=5]
+
+[node name="Player" instance=ExtResource( 1 )]
+
+position = Vector2( 100, 100 )
+script = ExtResource( 2 )
+
+[node name="StateName" parent="." index="3"]
+
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" parent="." index="4"]
+
+playback_default_blend_time = 0.1
+_sections_unfolded = [ "Playback Options" ]
+
+[node name="States" type="Node" parent="." index="5"]
+
+[node name="Idle" type="Node" parent="States" index="0"]
+
+script = ExtResource( 4 )
+
+[node name="Walk" type="Node" parent="States" index="1"]
+
+script = ExtResource( 5 )
+speed = 200
+
+[node name="Attack" type="Node" parent="States" index="2"]
+
+
