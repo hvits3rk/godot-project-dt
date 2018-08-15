@@ -8,6 +8,14 @@
 
 config_version=3
 
+[Debug]
+
+blue="#3F51B5"
+green="#8BC34A"
+red="#F44336"
+yellow="#FFEB3B"
+debug_mode=false
+
 [application]
 
 config/name="DwarfTrader"
@@ -33,6 +41,8 @@ window/stretch/aspect="keep"
 [input]
 
 left_click=[ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+debug_toggle=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
  ]
 
 [rendering]

@@ -7,20 +7,23 @@ var recalc_timer = 0
 func handle_event(event):
 	match event:
 		host.IDLE:
-			print("WalkState: handle_event() -> IDLE")
+			print("ChaseState: handle_event() -> IDLE")
 			return host.IdleState
 		host.ATTACK:
-			print("WalkState: handle_event() -> ATTACK")
+			print("ChaseState: handle_event() -> ATTACK")
 			return host.AttackState
 		host.FOLLOW:
-			print("WalkState: handle_event() -> FOLLOW")
+			print("ChaseState: handle_event() -> FOLLOW")
 			return host.FollowState
+		host.MOVE:
+			print("ChaseState: handle_event() -> MOVE")
+			return host.WalkState
 		_:
 			return null
 
 
 func enter():
-	print("WalkState: enter()")
+	print("ChaseState: enter()")
 	velocity.x = 0
 	velocity.y = 0
 	recalc_timer = 0
@@ -29,14 +32,14 @@ func enter():
 
 
 func update(delta):
-	vec_to_move_position = host.move_position - host.position
+	vec_to_move_position = (host.target.position + host.target.velocity) - host.position
 	
 	recalc_timer -= delta;
 	if recalc_timer <= 0:
 		recalc_timer = 0.1
 		velocity = vec_to_move_position.normalized() * host.stats.speed
 	
-	if vec_to_move_position.length() < 5:
+	if vec_to_move_position.length() < host.stats.attack_radius - host.target.velocity.length():
 		return true
 	
 	host.move_and_slide(velocity)
@@ -45,7 +48,7 @@ func update(delta):
 
 
 func exit():
-	print("WalkState: exit()")
+	print("ChaseState: exit()")
 	host.Anim.get_animation("walk").loop = false
 	if host.Anim.is_playing():
 		host.Anim.stop()

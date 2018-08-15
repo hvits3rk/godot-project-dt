@@ -9,18 +9,17 @@ func handle_event(event):
 		host.ATTACK:
 			print("IdleState: handle_event() -> ATTACK")
 			return host.AttackState
+		host.FOLLOW:
+			print("IdleState: handle_event() -> FOLLOW")
+			return host.FollowState
 		_:
 			return null
 
 
 func enter():
 	print("IdleState: enter()")
-	if host.Anim.current_animation != "idle":
-		if host.Anim.is_playing():
-			yield(host.Anim, "animation_finished")
-			host.Anim.stop()
-		host.Anim.get_animation("idle").loop = true
-		host.Anim.play("idle")
+	host.Anim.get_animation("idle").loop = true
+	host.Anim.play("idle")
 
 
 func update(delta):
@@ -30,3 +29,6 @@ func update(delta):
 func exit():
 	print("IdleState: exit()")
 	host.Anim.get_animation("idle").loop = false
+	if host.Anim.is_playing():
+		host.Anim.stop()
+		host.Anim.play("INIT")

@@ -12,9 +12,6 @@ func handle_event(event):
 		host.ATTACK:
 			print("WalkState: handle_event() -> ATTACK")
 			return host.AttackState
-		host.FOLLOW:
-			print("WalkState: handle_event() -> FOLLOW")
-			return host.FollowState
 		_:
 			return null
 
@@ -24,8 +21,12 @@ func enter():
 	velocity.x = 0
 	velocity.y = 0
 	recalc_timer = 0
-	host.Anim.get_animation("walk").loop = true
-	host.Anim.play("walk")
+	if host.Anim.current_animation != "walk":
+		if host.Anim.is_playing():
+			yield(host.Anim, "animation_finished")
+			host.Anim.stop()
+		host.Anim.get_animation("walk").loop = true
+		host.Anim.play("walk")
 
 
 func update(delta):
@@ -47,6 +48,3 @@ func update(delta):
 func exit():
 	print("WalkState: exit()")
 	host.Anim.get_animation("walk").loop = false
-	if host.Anim.is_playing():
-		host.Anim.stop()
-		host.Anim.play("INIT")
