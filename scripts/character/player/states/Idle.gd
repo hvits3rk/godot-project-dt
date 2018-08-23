@@ -19,7 +19,7 @@ func handle_event(event):
 func enter():
 	print("IdleState: enter()")
 	host.Anim.get_animation("idle").loop = true
-	host.Anim.play("idle")
+	host.Anim.queue("idle")
 
 
 func update(delta):
@@ -29,6 +29,3 @@ func update(delta):
 func exit():
 	print("IdleState: exit()")
 	host.Anim.get_animation("idle").loop = false
-	if host.Anim.is_playing():
-		host.Anim.stop()
-		host.Anim.play("INIT")

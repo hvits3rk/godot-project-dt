@@ -19,6 +19,7 @@ export(float) var ROAM_RADIUS = 140.0
 onready var Anim = get_node("AnimationPlayer")
 onready var stats = get_node("Stats")
 onready var camera = get_node("Camera2D")
+onready var pivot = get_node("Pivot")
 onready var direct_space = get_viewport().get_world_2d().get_direct_space_state()
 
 # == Player States ==
@@ -87,6 +88,14 @@ func clear_state_stack():
 		states_stack.front().exit()
 		states_stack.pop_front()
 		emit_signal("state_changed", states_stack)
+
+
+func look_at_position(pos):
+	var abs_pivot_scale_x = abs(pivot.scale.x)
+	if position.x - pos.x > 0:
+		pivot.scale.x = -abs_pivot_scale_x
+	else:
+		pivot.scale.x = abs_pivot_scale_x
 
 
 # == private functions ==

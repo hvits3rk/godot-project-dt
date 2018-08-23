@@ -10,7 +10,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 43.4342, 39.1318 )
 
-[node name="Goblin" index="0" groups=[
+[node name="Goblin" groups=[
 "interactable_character",
 "enemy",
 ] instance=ExtResource( 1 )]
@@ -29,11 +29,7 @@ script = ExtResource( 3 )
 
 [node name="Fixed" type="Node2D" parent="Debug" index="1"]
 
-[node name="Body" parent="PivotBody" index="0"]
-
-modulate = Color( 0.0513611, 0.773438, 0.299575, 1 )
-
-[node name="InteractArea" type="Area2D" parent="." index="6"]
+[node name="InteractArea" type="Area2D" parent="." index="5"]
 
 position = Vector2( 0, -20 )
 input_pickable = true

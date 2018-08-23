@@ -25,7 +25,7 @@ func enter():
 	velocity.y = 0
 	recalc_timer = 0
 	host.Anim.get_animation("walk").loop = true
-	host.Anim.play("walk")
+	host.Anim.play("walk", 0.1)
 
 
 func update(delta):
@@ -35,6 +35,7 @@ func update(delta):
 	if recalc_timer <= 0:
 		recalc_timer = 0.1
 		velocity = vec_to_move_position.normalized() * host.stats.speed
+		host.look_at_position(host.move_position)
 	
 	if vec_to_move_position.length() < 5:
 		return true
@@ -47,6 +48,3 @@ func update(delta):
 func exit():
 	print("WalkState: exit()")
 	host.Anim.get_animation("walk").loop = false
-	if host.Anim.is_playing():
-		host.Anim.stop()
-		host.Anim.play("INIT")

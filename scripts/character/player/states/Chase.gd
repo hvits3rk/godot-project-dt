@@ -28,18 +28,19 @@ func enter():
 	velocity.y = 0
 	recalc_timer = 0
 	host.Anim.get_animation("walk").loop = true
-	host.Anim.play("walk")
+	host.Anim.play("walk", 0.1)
 
 
 func update(delta):
-	vec_to_move_position = (host.target.position + host.target.velocity) - host.position
+	vec_to_move_position = host.target.position - host.position
 	
 	recalc_timer -= delta;
 	if recalc_timer <= 0:
 		recalc_timer = 0.1
+		host.look_at_position(host.target.position)
 		velocity = vec_to_move_position.normalized() * host.stats.speed
 	
-	if vec_to_move_position.length() < host.stats.attack_radius - host.target.velocity.length():
+	if vec_to_move_position.length() < host.stats.attack_radius - 10:
 		return true
 	
 	host.move_and_slide(velocity)
@@ -50,6 +51,3 @@ func update(delta):
 func exit():
 	print("ChaseState: exit()")
 	host.Anim.get_animation("walk").loop = false
-	if host.Anim.is_playing():
-		host.Anim.stop()
-		host.Anim.play("INIT")
