@@ -1,9 +1,9 @@
 extends "res://scripts/character/player/states/StateBase.gd"
 
-var vec_to_move_position = Vector2()
-var attacking = false
+var state_name = "attack"
 
-onready var anim = get_parent().get_parent().get_node("AnimationPlayer")
+var position_to_move = Vector2()
+var attacking = false
 
 
 func _ready():
@@ -13,18 +13,12 @@ func _ready():
 
 func handle_event(event):
 	match event:
-		host.IDLE:
-			print("AttackState: handle_event() -> IDLE")
-			return host.IdleState
 		host.MOVE:
 			print("AttackState: handle_event() -> WALK")
-			return host.WalkState
-		host.FOLLOW:
-			print("AttackState: handle_event() -> FOLLOW")
-			return host.FollowState
+			return { append = false, state = host.walk_state }
 		host.CHASE:
 			print("AttackState: handle_event() -> CHASE")
-			return host.ChaseState
+			return { append = false, state = host.chase_state }
 		_:
 			return null
 
@@ -35,17 +29,21 @@ func enter():
 
 
 func update(delta):
+	if not host.target:
+		return true
+	
 #	if host.target.stats.health <= 0:
+#		host.target = null
 #		return true
 	
-	vec_to_move_position = host.target.position - host.position
+	position_to_move = host.target.position - host.position
 	
-	if not attacking and vec_to_move_position.length() > host.stats.attack_radius:
+	if not attacking and position_to_move.length() > host.stats.attack_radius:
 		host.move_position = host.target.position
-		host.append_state(host.ChaseState)
+		host.append_state(host.chase_state)
 	
 	if not attacking and anim.current_animation != "attack":
-		anim.play("attack", -1, host.stats.attack_speed)
+		anim.play("attack", 0.1, host.stats.attack_speed)
 		attacking = true
 	
 	return false
@@ -58,15 +56,16 @@ func exit():
 
 
 func _on_attack_animation_started(anim_name):
+	if not host.target:
+		return
+	
 	if not attacking and anim_name != "attack":
 		host.look_at_position(host.target.position)
-		print("attack_started")
 		attacking = true
 
 
 func _on_attack_animation_finished(anim_name):
 	if attacking and anim_name == "attack":
-		print("attack_finished")
 		host.target.stats.health -= host.stats.damage
 		print("[%s] attacked [%s] for %d damage" % [host.name, host.target.name, host.stats.damage])
 		attacking = false

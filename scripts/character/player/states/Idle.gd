@@ -1,25 +1,23 @@
 extends "res://scripts/character/player/states/StateBase.gd"
 
+var state_name = "idle"
 
 func handle_event(event):
 	match event:
 		host.MOVE:
 			print("IdleState: handle_event() -> MOVE")
-			return host.WalkState
+			return { append = false, state = host.walk_state }
 		host.ATTACK:
 			print("IdleState: handle_event() -> ATTACK")
-			return host.AttackState
-		host.FOLLOW:
-			print("IdleState: handle_event() -> FOLLOW")
-			return host.FollowState
+			return { append = false, state = host.attack_state }
 		_:
 			return null
 
 
 func enter():
 	print("IdleState: enter()")
-	host.Anim.get_animation("idle").loop = true
-	host.Anim.queue("idle")
+	anim.get_animation("idle").loop = true
+	anim.queue("idle")
 
 
 func update(delta):
@@ -28,4 +26,4 @@ func update(delta):
 
 func exit():
 	print("IdleState: exit()")
-	host.Anim.get_animation("idle").loop = false
+	anim.get_animation("idle").loop = false

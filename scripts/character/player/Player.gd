@@ -10,84 +10,51 @@ enum {
 
 signal state_changed(states_stack)
 
-const ray_length = 1000
-
-export(float) var SPOT_RANGE = 200.0
-export(float) var FOLLOW_RANGE = 100.0
-export(float) var ROAM_RADIUS = 140.0
-
-onready var Anim = get_node("AnimationPlayer")
-onready var stats = get_node("Stats")
-onready var camera = get_node("Camera2D")
-onready var pivot = get_node("Pivot")
-onready var direct_space = get_viewport().get_world_2d().get_direct_space_state()
-
 # == Player States ==
-onready var IdleState = get_node("States/Idle")
-onready var WalkState = get_node("States/Walk")
-onready var AttackState = get_node("States/Attack")
-onready var FollowState = get_node("States/Follow")
-onready var ChaseState = get_node("States/Chase")
+onready var idle_state = get_node("States/Idle")
+onready var walk_state = get_node("States/Walk")
+onready var attack_state = get_node("States/Attack")
+onready var follow_state = get_node("States/Follow")
+onready var chase_state = get_node("States/Chase")
+
+onready var anim = get_node("AnimationPlayer")
+onready var stats = get_node("Stats")
+onready var pivot = get_node("Pivot")
+onready var inputController = get_node("InputController")
 
 var move_position = Vector2()
-var target = self
+var target = null
 
-var event
 var states_stack = []
-var new_state
 
-# == override functions ==
+
 func _ready():
-	$Debug/Moving.setup(global_position, ROAM_RADIUS, SPOT_RANGE, FOLLOW_RANGE)
-	Anim.play("INIT")
-	event = IDLE
-	states_stack.push_front(IdleState)
+	inputController.connect("command_occurred", self, "_on_InputController_command_occurred")
+	anim.play("INIT")
+	states_stack.push_front(idle_state)
 	states_stack.front().enter()
-	move_position = global_position
-	var interactable_charaters = get_tree().get_nodes_in_group("interactable_character")
-	for character in interactable_charaters:
-		character.get_node("InteractArea").connect("on_character_clicked", self, "_on_interactable_character_clicked")
 	emit_signal("state_changed", states_stack)
-
-
-func _unhandled_input(input):
-	event = _get_event_from_input(input)
-	new_state = states_stack.front().handle_event(event)
-	if new_state:
-		append_state(new_state)
 
 
 func _physics_process(delta):
 	if states_stack.front().update(delta):
-		states_stack.front().exit()
-		states_stack.pop_front()
+		states_stack.pop_front().exit()
 		states_stack.front().enter()
 		emit_signal("state_changed", states_stack)
 
 
-# == public functions ==
-func change_state(state):
-	if states_stack.size() > 1:
-		states_stack.front().exit()
-		states_stack.pop_front()
-		states_stack.push_front(state)
-		states_stack.front().enter()
-		emit_signal("state_changed", states_stack)
-	else:
-		append_state(state)
-
-func append_state(state):
-	states_stack.front().exit()
-	states_stack.push_front(state)
+func change_state(new_state):
+	clear_states_stack()
+	states_stack.push_front(new_state)
 	states_stack.front().enter()
 	emit_signal("state_changed", states_stack)
 
 
-func clear_state_stack():
-	while states_stack.size() > 1:
-		states_stack.front().exit()
-		states_stack.pop_front()
-		emit_signal("state_changed", states_stack)
+func append_state(new_state):
+	states_stack.front().exit()
+	states_stack.push_front(new_state)
+	states_stack.front().enter()
+	emit_signal("state_changed", states_stack)
 
 
 func look_at_position(pos):
@@ -98,27 +65,20 @@ func look_at_position(pos):
 		pivot.scale.x = abs_pivot_scale_x
 
 
-# == private functions ==
-func _get_event_from_input(input):
-	if input == null:
-		return null
-	
-	if input.is_action_pressed("left_click"):
-		var array = direct_space.intersect_point(get_global_mouse_position())
-		
-		if array.empty():
-			move_position = get_global_mouse_position()
-			return MOVE
-	
-	return null
+func clear_states_stack():
+	while states_stack.size() > 1:
+		states_stack.pop_front().exit()
+		states_stack.front().enter()
 
 
-func _on_interactable_character_clicked(character):
-	target = character
-	if target.is_in_group("enemy") and target.is_in_group("interactable_character"):
-		print("Player._on_interactable_character_clicked(): %s is enemy" % [character.name])
-		new_state = states_stack.front().handle_event(ATTACK)
-	
+func _on_InputController_command_occurred(command, object):
+	if object.has("move_position"):
+		move_position = object.move_position
+	elif object.has("target"):
+		target = object.target
+	var new_state = states_stack.front().handle_event(command)
 	if new_state:
-		clear_state_stack()
-		append_state(new_state)
+		if new_state.append:
+			append_state(new_state.state)
+		else:
+			change_state(new_state.state)

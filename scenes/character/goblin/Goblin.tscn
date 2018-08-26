@@ -11,8 +11,8 @@ custom_solver_bias = 0.0
 extents = Vector2( 43.4342, 39.1318 )
 
 [node name="Goblin" groups=[
-"interactable_character",
 "enemy",
+"interactable_character",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
@@ -29,6 +29,10 @@ script = ExtResource( 3 )
 
 [node name="Fixed" type="Node2D" parent="Debug" index="1"]
 
+[node name="CollisionShape2D" parent="." index="3"]
+
+visible = true
+
 [node name="InteractArea" type="Area2D" parent="." index="5"]
 
 position = Vector2( 0, -20 )
@@ -37,12 +41,12 @@ gravity_vec = Vector2( 0, 0 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-collision_layer = 16
-collision_mask = 16
+collision_layer = 512
+collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 4 )
-_sections_unfolded = [ "Audio Bus", "Collision", "Pickable" ]
+_sections_unfolded = [ "Collision", "Pickable" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" index="0"]
 
