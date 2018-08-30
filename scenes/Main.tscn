@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/debug/debug.gd" type="Script" id=1]
 [ext_resource path="res://scenes/character/player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/character/goblin/Goblin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/character/ai_characters/BaseAiCharacter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
 
 [node name="Main" type="Node"]
@@ -20,18 +20,95 @@ sort_enabled = true
 position = Vector2( 362.584, 247.412 )
 collision_layer = 1
 collision_mask = 1
-_sections_unfolded = [ "Transform" ]
 
 [node name="Goblin" parent="YSort" index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 49.5498, 99.7027 )
 collision_layer = 1
 collision_mask = 1
-_sections_unfolded = [ "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="." index="2"]
+[node name="MiningResource" type="Sprite" parent="." index="2" groups=[
+"ore_resource",
+]]
 
-position = Vector2( 369.298, 367.791 )
+position = Vector2( 210.134, 484.783 )
 texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="MiningResource" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -19.0
+margin_top = -55.0
+margin_right = 21.0
+margin_bottom = -41.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "MINE"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Forge" type="Sprite" parent="." index="3" groups=[
+"forge",
+]]
+
+position = Vector2( 732.518, 367.791 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Forge" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -21.0
+margin_top = -56.0
+margin_right = 22.0
+margin_bottom = -42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "FORGE"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Tree" type="Sprite" parent="." index="4" groups=[
+"log_resource",
+]]
+
+position = Vector2( 399.226, 65.7883 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Tree" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -25.0
+margin_top = -59.0
+margin_right = 22.0
+margin_bottom = -45.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "FOREST"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 

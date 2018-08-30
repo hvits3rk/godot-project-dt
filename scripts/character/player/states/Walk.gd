@@ -27,7 +27,8 @@ func enter():
 func update(delta):
 	position_to_move = host.move_position - host.position
 	
-	recalc_timer -= delta;
+	recalc_timer -= delta
+	
 	if recalc_timer <= 0:
 		recalc_timer = 0.1
 		velocity = position_to_move.normalized() * host.stats.speed

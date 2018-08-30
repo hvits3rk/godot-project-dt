@@ -34,7 +34,8 @@ var state_name = "follow"
 #func update(delta):
 #	vec_to_move_position = host.move_position - host.position
 #
-#	recalc_timer -= delta;
+#	recalc_timer -= delta
+#	
 #	if recalc_timer <= 0:
 #		recalc_timer = 0.1
 #		velocity = vec_to_move_position.normalized() * host.stats.speed

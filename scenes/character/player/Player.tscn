@@ -11,7 +11,6 @@
 
 [node name="Player" index="0" instance=ExtResource( 1 )]
 
-position = Vector2( 97.2925, 102.708 )
 script = ExtResource( 2 )
 
 [node name="InputController" type="Node2D" parent="." index="0"]
@@ -20,6 +19,7 @@ script = ExtResource( 3 )
 
 [node name="Stats" parent="." index="1"]
 
+speed = 180
 attack_radius = 100
 attack_speed = 2
 

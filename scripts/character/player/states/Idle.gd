@@ -6,10 +6,10 @@ func handle_event(event):
 	match event:
 		host.MOVE:
 			print("IdleState: handle_event() -> MOVE")
-			return { append = false, state = host.walk_state }
+			return { append = true, state = host.walk_state }
 		host.ATTACK:
 			print("IdleState: handle_event() -> ATTACK")
-			return { append = false, state = host.attack_state }
+			return { append = true, state = host.attack_state }
 		_:
 			return null
 

@@ -36,7 +36,8 @@ func enter():
 func update(delta):
 	position_to_move = host.target.position - host.position
 	
-	recalc_timer -= delta;
+	recalc_timer -= delta
+	
 	if recalc_timer <= 0:
 		recalc_timer = 0.1
 		host.look_at_position(host.target.position)
