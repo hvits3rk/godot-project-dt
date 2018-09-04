@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/debug/debug.gd" type="Script" id=1]
 [ext_resource path="res://scenes/character/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/character/ai_characters/BaseAiCharacter.tscn" type="PackedScene" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/object/interactable/resource/Mine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/object/interactable/workbench/forge/Forge.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/object/interactable/resource/Tree.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/object/interactable/resource/Stump.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node"]
 
@@ -17,33 +20,27 @@ sort_enabled = true
 
 [node name="Player" parent="YSort" index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 362.584, 247.412 )
-collision_layer = 1
-collision_mask = 1
+position = Vector2( 424.634, 312.786 )
 
 [node name="Goblin" parent="YSort" index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 49.5498, 99.7027 )
-collision_layer = 1
-collision_mask = 1
+position = Vector2( 44.0096, 254.827 )
 
-[node name="MiningResource" type="Sprite" parent="." index="2" groups=[
-"ore_resource",
-]]
+[node name="Mine" parent="YSort" index="2" instance=ExtResource( 4 )]
 
-position = Vector2( 210.134, 484.783 )
-texture = ExtResource( 4 )
+position = Vector2( 211.634, 520.775 )
+collision_mask = 6
 
-[node name="Label" type="Label" parent="MiningResource" index="0"]
+[node name="Label" type="Label" parent="YSort/Mine" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = -19.0
-margin_top = -55.0
+margin_top = -77.0
 margin_right = 21.0
-margin_bottom = -41.0
+margin_bottom = -63.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -51,27 +48,25 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "MINE"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Forge" type="Sprite" parent="." index="3" groups=[
-"forge",
-]]
+[node name="Forge" parent="YSort" index="3" instance=ExtResource( 5 )]
 
-position = Vector2( 732.518, 367.791 )
-texture = ExtResource( 4 )
+position = Vector2( 736.841, 378.947 )
 
-[node name="Label" type="Label" parent="Forge" index="0"]
+[node name="Label" type="Label" parent="YSort/Forge" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -21.0
-margin_top = -56.0
-margin_right = 22.0
-margin_bottom = -42.0
+margin_left = -22.0
+margin_top = -77.0
+margin_right = 21.0
+margin_bottom = -63.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -79,34 +74,60 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "FORGE"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Tree" type="Sprite" parent="." index="4" groups=[
-"log_resource",
-]]
+[node name="Tree" parent="YSort" index="4" instance=ExtResource( 6 )]
 
-position = Vector2( 399.226, 65.7883 )
-texture = ExtResource( 4 )
+position = Vector2( 321.329, 47.6454 )
+collision_mask = 6
 
-[node name="Label" type="Label" parent="Tree" index="0"]
+[node name="Label" type="Label" parent="YSort/Tree" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -25.0
-margin_top = -59.0
-margin_right = 22.0
-margin_bottom = -45.0
+margin_left = -19.0
+margin_top = -77.0
+margin_right = 21.0
+margin_bottom = -63.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "FOREST"
+text = "TREE"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Stump" parent="YSort" index="5" instance=ExtResource( 7 )]
+
+position = Vector2( 593.96, 84.4801 )
+
+[node name="Label" type="Label" parent="YSort/Stump" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -31.0
+margin_top = -75.0
+margin_right = 30.0
+margin_bottom = -61.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "STUMP"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

@@ -7,6 +7,10 @@ var velocity = Vector2()
 var position_to_move = Vector2()
 var timer = 0
 var action = null
+var at_position = false
+
+func _ready():
+	interactable_area.connect("body_entered", self, "_on_body_entered")
 
 
 func enter():
@@ -14,6 +18,9 @@ func enter():
 	velocity.y = 0
 	timer = 0
 	action = agent.current_actions.front()
+	if action != null:
+		var overlapping_bodies = interactable_area.get_overlapping_bodies()
+		at_position = overlapping_bodies.has(action.target)
 	anim.get_animation("walk").loop = true
 	anim.play("walk", 0.1)
 
@@ -29,10 +36,10 @@ func update(delta):
 	if timer <= 0:
 		timer = delay_time
 		velocity = position_to_move.normalized() * character.stats.move_speed
-		character.look_at_position(position_to_move)
+		character.look_at_position(action.target.position)
 	
 	# Если дошли до цели, можно выходить из состояния движения
-	if position_to_move.length() < 5:
+	if at_position or position_to_move.length() < 5:
 		action.in_range = true
 		return true
 	
@@ -44,4 +51,11 @@ func update(delta):
 
 func exit():
 	action = null
+	at_position = false
 	anim.get_animation("walk").loop = false
+
+
+func _on_body_entered(body):
+	if action != null and body == action.target:
+		at_position = true
+

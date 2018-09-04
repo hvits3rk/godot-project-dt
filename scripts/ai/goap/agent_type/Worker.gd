@@ -3,17 +3,17 @@ extends "res://scripts/ai/goap/agent_type/BaseAgent.gd"
 
 func get_world_state():
 	var world_state = .get_world_state()
-	var items = backpack.items
+	var resources = backpack.resources
 	
-	world_state.has_logs = items.num_logs > 0
-	world_state.has_pickaxe = items.pickaxe != null
-	world_state.has_axe = items.axe != null
-	world_state.has_firewood_to_create_axe = items.num_firewood >= 3
-	world_state.has_firewood_to_create_pickaxe = items.num_firewood >= 3
-	world_state.has_firewood_to_create_weapon = items.num_firewood >= 5
-	world_state.has_ore_to_create_axe = items.num_ore >= 1
-	world_state.has_ore_to_create_pickaxe = items.num_ore >= 1
-	world_state.has_ore_to_create_weapon = items.num_ore >= 2
+	world_state.has_wood = backpack.has_resource("wood")
+	world_state.has_pickaxe = equipment.check_pickaxe()
+	world_state.has_axe = equipment.check_axe()
+	world_state.has_wood_to_create_axe = backpack.has_resource("wood", 3)
+	world_state.has_wood_to_create_pickaxe = backpack.has_resource("wood", 3)
+	world_state.has_wood_to_create_weapon = backpack.has_resource("wood", 5)
+	world_state.has_ore_to_create_axe = backpack.has_resource("ore", 1)
+	world_state.has_ore_to_create_pickaxe = backpack.has_resource("ore", 1)
+	world_state.has_ore_to_create_weapon = backpack.has_resource("ore", 3)
 	
 	return world_state
 

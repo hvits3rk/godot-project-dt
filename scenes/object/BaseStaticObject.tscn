@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://shadow.png" type="Texture" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 13.0
+height = 38.0
+
+[node name="BaseStaticObject" type="StaticBody2D"]
+
+input_pickable = false
+collision_layer = 8
+collision_mask = 12
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="Pivot" type="Position2D" parent="." index="0"]
+
+[node name="ShadowPivot" type="Position2D" parent="Pivot" index="0"]
+
+[node name="Shadow" type="Sprite" parent="Pivot/ShadowPivot" index="0"]
+
+self_modulate = Color( 1, 1, 1, 0.3 )
+position = Vector2( 0, 5 )
+scale = Vector2( 0.95, 0.7 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="BodyPivot" type="Position2D" parent="Pivot" index="1"]
+
+[node name="Body" type="Sprite" parent="Pivot/BodyPivot" index="0"]
+
+position = Vector2( 0, -20 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+rotation = 1.5708
+shape = SubResource( 1 )
+
+

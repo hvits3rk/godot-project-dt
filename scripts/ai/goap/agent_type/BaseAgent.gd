@@ -3,12 +3,11 @@ extends Node
 # Базовый класс для агента, это абстрактный класс
 
 onready var character = get_parent()
-onready var backpack = character.get_node("Backpack")
+onready var backpack = character.get_node("Pivot/PivotBody/Equipment/Backpack")
+onready var equipment = character.get_node("Pivot/PivotBody/Equipment")
 
-var velocity = Vector2()
-var position_to_move = Vector2()
-var black_board = {} setget add_world_state, get_world_state
-var goal = {} setget set_goal, get_goal
+var black_board = {}
+var goal = {}
 
 
 # Возвращает состояние мира агента
@@ -17,11 +16,6 @@ func get_world_state():
 	black_board.good_health = character.stats.health > 20.0
 	
 	return black_board
-
-
-# Добавить состояние
-func add_world_state(state):
-	black_board[state.key] = black_board[state.value]
 
 
 # Удалить состояние
@@ -33,11 +27,6 @@ func remove_world_state(key):
 # Получить цель
 func get_goal():
 	return goal
-
-
-# Установить цель
-func set_goal(new_goal):
-	goal = new_goal
 
 
 # План провалился

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/object/BaseStaticObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/object/interactable/InteractActions.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 60.0
+
+[node name="BaseInteractableObject" groups=[
+"interactable_object",
+] instance=ExtResource( 1 )]
+
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="InteractActions" type="Node" parent="." index="0"]
+
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="." index="3"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
+collision_layer = 512
+collision_mask = 512
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+shape = SubResource( 1 )
+
+

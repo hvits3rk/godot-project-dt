@@ -3,10 +3,10 @@ extends "res://scripts/ai/goap/GoapAction.gd"
 
 func _ready():
 	preconditions.tired = false
-	preconditions.has_pickaxe = true
-	effects.has_ore_to_create_axe = true
-	effects.has_ore_to_create_pickaxe = true
-	effects.has_ore_to_create_weapon = true
+	preconditions.has_axe = true
+	effects.has_wood_to_create_axe = true
+	effects.has_wood_to_create_pickaxe = true
+	effects.has_wood_to_create_weapon = true
 
 
 func reset():
@@ -22,7 +22,7 @@ func requires_in_range():
 
 
 func check_procedural_precondition(character):
-	var mining_resources = get_tree().get_nodes_in_group("ore_resource")
+	var mining_resources = get_tree().get_nodes_in_group("wood_resource")
 	var closest = null
 	var closest_dist = 0
 	
@@ -38,11 +38,16 @@ func check_procedural_precondition(character):
 	
 	target = closest
 	
+	if target != null:
+		var io = target.interact.get_interact_object(character, "chop_tree")
+		if io != null:
+			cost = 20 - io.products.resources.wood
+	
 	return closest != null
 
 
 func enter(character):
-	interact_object = target.interact.get_interact_object(character, "mine")
+	interact_object = target.interact.get_interact_object(character, "chop_tree")
 	if interact_object == null:
 		return false
 	
@@ -68,8 +73,8 @@ func _on_action_animation_finished(anim_name):
 		return
 	
 	if anim_name == interact_object.animation:
-		target.interact.perform_action(character, interact_object)
-		print("Resources Mined! [{0}]".format([interact_object.products]))
+		target.perform_action(character, interact_object)
+		print("Resources Chopped! [{0}]".format([interact_object.products]))
 		print("Character Resources! [{0}]".format([character.backpack.resources]))
 		action_done = true
-		emit_signal("action_finished", { msg = "Ore Mined!" })
+		emit_signal("action_finished", { msg = "Wood Chopped!" })

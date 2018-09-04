@@ -4,8 +4,8 @@ extends "res://scripts/ai/goap/GoapAction.gd"
 func _ready():
 	preconditions.tired = false
 	preconditions.has_pickaxe = true
-	#preconditions.has_axe = true
-	preconditions.has_firewood_to_create_weapon = true
+	preconditions.has_axe = true
+	preconditions.has_wood_to_create_weapon = true
 	preconditions.has_ore_to_create_weapon = true
 	effects.create_weapon = true
 
@@ -42,14 +42,28 @@ func check_procedural_precondition(character):
 	return closest != null
 
 
+func enter(character):
+	interact_object = target.interact.get_interact_object(character, "create_sword")
+	if interact_object == null:
+		return false
+	
+	return true
+
+
 func perform(character, delta):
+	if not action_done and anim.current_animation != interact_object.animation:
+		anim.play(interact_object.animation, 0.1)
+	
 	if timer >= action_duration:
-		character.backpack.items.num_ore -= 2
-		character.backpack.items.num_firewood -= 5
-		#character.stats.decrease_stamina(20)
+		target.interact.perform_action(character, interact_object)
+		if character.equipment.get_weapon() == null:
+			var swords = character.backpack.get_weapons_by_types(["weapon", "sword"])
+			assert(swords.size() > 0)
+			character.equipment.equip_weapon(swords[0])
+		print("Sword Forged! [{0}]".format([interact_object.products]))
+		print("Character Resources! [{0}]".format([character.backpack.resources]))
 		action_done = true
-		emit_signal("action_finished", { msg = "Weapon Created!" })
-		print("Weapon Created!")
+		emit_signal("action_finished", { msg = "Sword Created" })
 	
 	timer += delta
 	

@@ -30,7 +30,6 @@ func update(delta):
 	# Состовляем план
 	agent.planner.plan(character, agent.available_actions, world_state, goal)
 	var plan = yield(agent.planner, "plan_found")
-	
 	# Обновляем таймер
 	timer = delay_time
 	

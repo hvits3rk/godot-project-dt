@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/object/interactable/workbench/BaseWorkbench.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/object/interactable/workbench/Forge.gd" type="Script" id=2]
+
+[node name="Forge" groups=[
+"forge",
+] instance=ExtResource( 1 )]
+
+input_pickable = false
+collision_layer = 8
+collision_mask = 12
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+script = ExtResource( 2 )
+
+

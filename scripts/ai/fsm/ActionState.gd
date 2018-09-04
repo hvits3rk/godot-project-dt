@@ -1,12 +1,12 @@
 extends "res://scripts/ai/fsm/BaseState.gd"
 
 var action = null
-
+var action_entered = false
 
 func enter():
+	action_entered = false
 	if agent.has_action_plan():
 		action = agent.current_actions.front()
-	# anim.play(action.animation, 0.1)
 
 
 func update(delta):
@@ -44,8 +44,17 @@ func update(delta):
 		var in_range = action.is_in_range() if action.requires_in_range() else true
 		
 		if in_range:
+			var performed = true
+			
+			if not action_entered:
+				performed = action.enter(character)
+				action_entered = true
+			
 			# Совершаем дейсвие
-			if not action.perform(character, delta):
+			if performed:
+				performed = action.perform(character, delta)
+			
+			if not performed:
 				# Дейсвие провалилось, идем планировать
 				data_provider.plan_failed(data_provider.get_goal())
 				data_provider.plan_aborted(action)
@@ -65,4 +74,5 @@ func update(delta):
 
 
 func exit():
+	action_entered = false
 	action = null

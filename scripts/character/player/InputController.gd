@@ -9,7 +9,7 @@ onready var direct_space = get_viewport().get_world_2d().get_direct_space_state(
 func _ready():
 	var interactable_charaters = get_tree().get_nodes_in_group("interactable_character")
 	for character in interactable_charaters:
-		character.get_node("InteractArea").connect("on_character_clicked", self, "_on_interactable_character_clicked")
+		character.get_node("InteractableArea").connect("on_character_clicked", self, "_on_interactable_character_clicked")
 
 
 func _unhandled_input(input):
