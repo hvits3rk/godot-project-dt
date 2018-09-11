@@ -1,5 +1,7 @@
 extends Position2D
 
+# Класс отвечает за экиперовку персонажа
+
 onready var backpack = get_node("Backpack")
 onready var tools = get_node("Tools")
 onready var weapon = get_node("Weapon")
@@ -99,7 +101,7 @@ func use(equip_name, amount):
 
 
 func check_durability():
-	pass
+	return true
 
 
 func has_needed_tools(array):
@@ -143,6 +145,7 @@ func equip_hammer(obj):
 	_wr_hammer = weakref(_hammer)
 
 
+# TODO: отдельный фэктори класс
 func _instance_base_equipment_node(parent, obj):
 	var scene = load(obj.scene)
 	var texture = load(obj.texture)

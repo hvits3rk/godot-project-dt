@@ -8,6 +8,7 @@ onready var backpack = get_node("Pivot/PivotBody/Equipment/Backpack")
 onready var equipment = get_node("Pivot/PivotBody/Equipment")
 
 
+# Для теста, выдадим топор и кирку
 func _ready():
 	var pickaxe = {
 		id = "0",
@@ -39,6 +40,7 @@ func _ready():
 	equipment.equip_item(axe)
 
 
+# TODO: этот метод засунуть в супер класс для всех персонажей
 func look_at_position(pos):
 	var abs_pivot_scale_x = abs(pivot.scale.x)
 	if position.x - pos.x > 0:

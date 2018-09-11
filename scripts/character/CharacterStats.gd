@@ -1,7 +1,8 @@
 extends Node2D
 
+# этот класс будет хранить всю инфу по характеристикам персонажа
+
 export (float, 1, 200, 0.5) var move_speed = 50.0
-export (float) var speed = 200
 export (float) var max_health = 100
 export (float) var damage = 20
 export (float) var attack_radius = 60
